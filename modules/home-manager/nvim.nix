@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 
 let
   cfg = config.t.nvim;
@@ -15,6 +15,14 @@ in
       beam = { enable = true; };
       js = true;
     };
+
+    home.packages = [
+      pkgs.lua-language-server
+      pkgs.nil
+
+      # clipboard support
+      pkgs.wl-clipboard
+    ];
 
     programs.neovim = {
       enable = true;

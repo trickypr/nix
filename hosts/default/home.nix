@@ -34,6 +34,7 @@
     sway = true;
 
     nvim = { enable = true; default = true; };
+    vscode = { enable = true; vim = true; };
 
     dev = {
       beam = { enable = true; vscode = true; };
@@ -57,21 +58,11 @@
     pkgs.file
     pkgs.fzf
     pkgs.ripgrep
-    pkgs.wl-clipboard
     pkgs.tree
-
-    pkgs.lua-language-server
-    pkgs.nil
   ];
 
   catppuccin.flavor = "mocha";
   catppuccin.enable = true;
-
-  programs.vscode = {
-    enable = true;
-    enableExtensionUpdateCheck = false;
-    mutableExtensionsDir  = false;
-  };
 
   programs.git = {
     enable = true;
