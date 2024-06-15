@@ -14,10 +14,12 @@ in
       pkgs.swaybg
     ];
 
+    programs.kitty.enable = true;
+
     wayland.windowManager.sway = {
       enable = true;
       catppuccin.enable = true;
-      config = rec {
+      config = {
         modifier = "Mod4";
         terminal = "kitty";
         bars = [];

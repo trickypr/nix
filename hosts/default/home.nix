@@ -33,9 +33,16 @@
     zsh = true;
     sway = true;
 
+    nvim = { enable = true; default = true; };
+
     dev = {
       beam = { enable = true; vscode = true; };
       js = true;
+    };
+
+    _1password = {
+      enable = true;
+      signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGKZ4NodCumS5eW/0G1xJZ3/MIpKwVxTRhJLodcR5BZg";
     };
   };
 
@@ -57,25 +64,8 @@
     pkgs.nil
   ];
 
-  xdg.configFile."kitty/kitty.conf" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/kitty.conf";
-  };
-
-  xdg.configFile."nvim" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager/nvim";
-    recursive = true;
-  };
-
   catppuccin.flavor = "mocha";
   catppuccin.enable = true;
-  gtk.enable = false;
-
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    vimAlias = true;
-    catppuccin.enable = false;
-  };
 
   programs.vscode = {
     enable = true;
@@ -83,28 +73,10 @@
     mutableExtensionsDir  = false;
   };
 
-  programs._1password-shell-plugins = {
-    # enable 1Password shell plugins for bash, zsh, and fish shell
-    enable = true;
-    # the specified packages as well as 1Password CLI will be
-    # automatically installed and configured to use shell plugins
-    plugins = with pkgs; [ gh ];
-  };
-  
   programs.git = {
     enable = true;
     userEmail = "23250792+trickypr@users.noreply.github.com";
     userName = "trickypr";
-    extraConfig = {
-      gpg.format = "ssh";
-      gpg."ssh" = {
-        program = "${pkgs._1password-gui}/share/1password/op-ssh-sign";
-      };
-    };
-    signing = {
-      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGKZ4NodCumS5eW/0G1xJZ3/MIpKwVxTRhJLodcR5BZg";
-      signByDefault = true;
-    };
   };
 
   programs.btop.enable = true;
