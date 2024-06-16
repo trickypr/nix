@@ -12,13 +12,24 @@
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
-    nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs; vars = { user = "trickypr"; }; };
-      modules = [
-        ./hosts/default/configuration.nix
-        inputs.catppuccin.nixosModules.catppuccin
-        inputs.home-manager.nixosModules.default
-      ];
-    };
+    nixosConfigurations = {
+      default = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs; vars = { user = "trickypr"; }; };
+        modules = [
+          ./hosts/default/configuration.nix
+          inputs.catppuccin.nixosModules.catppuccin
+          inputs.home-manager.nixosModules.default
+        ];
+      };
+      
+      tricky-fw = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs; vars = { user = "trickypr"; }; };
+        modules = [
+          ./hosts/tricky-fw/configuration.nix
+          inputs.catppuccin.nixosModules.catppuccin
+          inputs.home-manager.nixosModules.default
+        ];
+      };
+    }; 
   };
 }

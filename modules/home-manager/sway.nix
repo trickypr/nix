@@ -63,7 +63,7 @@ in
       enable = true;
       settings = [
         {
-          profile.name = "desktop";
+          profile.name = "tricky-desktop";
           profile.exec = [ 
             "${pkgs.sway}/bin/swaymsg workspace 1, move workspace to DP-2"
             "${pkgs.sway}/bin/swaymsg workspace 2, move workspace to DP-3"
@@ -71,6 +71,12 @@ in
           profile.outputs = [
             { criteria = "DP-2"; position = "0,600";  }
             { criteria = "DP-3"; transform = "90"; position = "3840,0"; }
+          ];
+        }
+        {
+          profile.name = "tricky-fw-default";
+          profile.outputs = [
+            { criteria = "eDP-1"; scale = 1.5; }
           ];
         }
       ];
