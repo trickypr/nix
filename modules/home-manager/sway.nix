@@ -13,6 +13,7 @@ in
       pkgs.wofi
       pkgs.swaybg
       pkgs.acpi
+      pkgs.lxqt.lxqt-policykit
     ];
 
     programs.kitty.enable = true;
@@ -54,8 +55,10 @@ in
         startup = [
           {command = "waybar";}
           {command = "swaybg --color 11111b --mode center --image /etc/nixos/kitppuccin.png";}
-          {command = "sleep 5; systemctl --user start kanshi.service";}
-          {command = "sleep 30; 1password --silent";}
+          {command = "sleep 5 && systemctl --user start kanshi.service";}
+          {command = "sleep 10 && ${pkgs.lxqt.lxqt-policykit
+}/bin/lxqt-policykit-agent";}
+          {command = "sleep 30 && ${pkgs._1password-gui}/bin/1password --silent";}
         ];
 
         input."2362:628:PIXA3854:00_093A:0274_Touchpad" = {
@@ -85,7 +88,7 @@ in
             "${pkgs.sway}/bin/swaymsg workspace 1, move workspace to eDP-1"
           ];
           profile.outputs = [
-            { criteria = "eDP-1"; scale = 1.5; }
+            { criteria = "eDP-1"; scale = 1.25; }
           ];
         }
       ];
