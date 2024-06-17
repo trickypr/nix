@@ -21,7 +21,7 @@
       fira-code-nerdfont
       fira-code
     ];
-    fonts.fonts = with pkgs; [ fira-code ];
+    fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
 
     # Enable sound with pipewire.
     sound.enable = false; # https://github.com/NixOS/nixpkgs/issues/319809

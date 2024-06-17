@@ -12,6 +12,7 @@ in
     home.packages = [
       pkgs.wofi
       pkgs.swaybg
+      pkgs.acpi
     ];
 
     programs.kitty.enable = true;
@@ -56,6 +57,11 @@ in
           {command = "sleep 5; systemctl --user start kanshi.service";}
           {command = "sleep 30; 1password --silent";}
         ];
+
+        input."2362:628:PIXA3854:00_093A:0274_Touchpad" = {
+          natural_scroll = "enabled";
+          scroll_factor = "0.2";
+        };
       };
     };
 
@@ -75,6 +81,9 @@ in
         }
         {
           profile.name = "tricky-fw-default";
+          profile.exec = [
+            "${pkgs.sway}/bin/swaymsg workspace 1, move workspace to eDP-1"
+          ];
           profile.outputs = [
             { criteria = "eDP-1"; scale = 1.5; }
           ];
@@ -92,30 +101,70 @@ in
 
           modules-left = [ "sway/workspaces" ];
           modules-center = [ "clock" ];
-          modules-right = [ "tray" "pulseaudio" "backlight" "battery" ];
+          modules-right = [ "tray" "group/volume" "group/backlight" "battery" ];
 
-          "hyprland/workspaces" = {
-            all-outputs = true;
-            show-special = true;
+          "group/volume" = {
+            orientation = "horizontal";
+            drawer = {
+              transition-duration = 200;
+            };
+            modules = [ "pulseaudio" "pulseaudio/slider" ];
+          };
+
+          pulseaudio = {
+             format = "{icon}   {volume}%";
+             format-icons = {
+               default = ["" ""];
+             };
+          };
+
+          "group/backlight" = {
+            orientation = "horizontal";
+            drawer = {
+              transition-duration = 200;
+            };
+            modules = [ "backlight" "backlight/slider" ];
+          };
+
+          backlight = {
+            format = "{icon}   {percent}%";
+            format-icons = ["" ""];
+          };
+
+          battery = {
+            format = "{icon}   {capacity}%";
+            format-icons = ["" "" "" "" ""];
           };
         };
       };
       style = ''
         * {
-          font-family: "FiraCodeNerdFont";
+          font-size: 0.75rem;
+          font-weight: 500;
         }
 
         #waybar {
-            background: none;
+          background: none;
+          color: #cad3f5;
         }
 
-        .modules-right {
-            padding: 0 12px;
+        .modules-right > * > * {
+          margin: 0 0.5rem;
+        }
+
+        .modules-left .text-button {
+          padding: 0 0.65rem;
+          border-radius: 100%;
         }
 
         #workspaces .focused {
           background-color: #ca9ee6;
           color: #292c3c;
+        }
+
+        #pulseaudio-slider trough, #backlight-slider trough {
+          min-height: 10px;
+          min-width: 80px;
         }
       '';
       catppuccin.enable = false;

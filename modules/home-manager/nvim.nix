@@ -22,6 +22,9 @@ in
 
       # clipboard support
       pkgs.wl-clipboard
+
+      # needed by treesitter
+      pkgs.clang
     ];
 
     programs.neovim = {

@@ -13,6 +13,8 @@
       inputs.home-manager.nixosModules.default
     ];
 
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   main-user = {
     enable = true;
     userName = vars.user;
@@ -23,6 +25,7 @@
   networking.hostName = "tricky-fw"; 
   networking.networkmanager.enable = true;
   networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+  services.tailscale.enable = true;
 
   catppuccin.flavor = "mocha";
   catppuccin.enable = true;
@@ -37,7 +40,7 @@
     # Locale management
     cbr.enable = true;
 
-    # devenv.enable = true;
+    devenv.enable = true;
 
     dm = {
       enable = true;
