@@ -189,6 +189,7 @@ require("lazy").setup({
         nil_ls = {}, -- Nixos
         gleam = {},
         tsserver = {},
+        clangd = {},
       }
     },
     ---@param opts PluginLspOpts
