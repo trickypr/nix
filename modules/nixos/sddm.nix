@@ -14,7 +14,7 @@ in
     # Setup SDDM
     services.displayManager.sddm.enable = true;
     services.displayManager.sddm.wayland.enable = true;
-    services.displayManager.sddm.package = pkgs.kdePackages.sddm;
+    services.displayManager.sddm.package = lib.mkForce pkgs.kdePackages.sddm;
 
     # Keyring
     services.gnome.gnome-keyring.enable = cfg.keyring;
