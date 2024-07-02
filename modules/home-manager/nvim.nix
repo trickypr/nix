@@ -19,6 +19,8 @@ in
     home.packages = [
       pkgs.lua-language-server
       pkgs.nil
+      pkgs.elmPackages.elm-language-server
+      pkgs.rust-analyzer
 
       # clipboard support
       pkgs.wl-clipboard

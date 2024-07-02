@@ -186,7 +186,9 @@ require("lazy").setup({
         jsonls = {},
         lua_ls = {},
         elixirls = {},
+        elmls = {},
         nil_ls = {}, -- Nixos
+        rust_analyzer = {},
         gleam = {},
         tsserver = {},
         clangd = {},

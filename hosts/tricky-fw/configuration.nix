@@ -27,6 +27,12 @@
   networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   services.tailscale.enable = true;
 
+  services.fwupd.enable = true;
+  services.fprintd = {
+    enable = true;
+  };
+  environment.systemPackages = with pkgs; [ fprintd ];
+
   catppuccin.flavor = "mocha";
   catppuccin.enable = true;
 

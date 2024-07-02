@@ -38,13 +38,26 @@
 
     dev = {
       beam = { enable = true; vscode = true; };
+      elm = true;
       js = true;
+      rust = true;
     };
 
     _1password = {
       enable = true;
       signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGKZ4NodCumS5eW/0G1xJZ3/MIpKwVxTRhJLodcR5BZg";
     };
+  };
+
+  services.mpd = {
+    enable = true;
+    musicDirectory = "~/Music";
+    extraConfig = ''
+  audio_output {
+    type "pipewire"
+    name "Pipewire"
+  }
+'';
   };
 
   home.packages = [

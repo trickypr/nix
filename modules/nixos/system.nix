@@ -20,6 +20,8 @@
 
       fira-code-nerdfont
       fira-code
+      usbutils
+      pciutils
     ];
     fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
 
