@@ -17,14 +17,8 @@ in
     services.displayManager.sddm.package = pkgs.kdePackages.sddm;
 
     # Keyring
-    # services.gnome.gnome-keyring.enable = cfg.keyring;
-    # security.pam.services.sddm.enableGnomeKeyring = cfg.keyring;
-
-    # kde wallet
-    security.pam.services.kwallet = {
-      name = "kwallet";
-      enableKwallet = true;
-    };
+    services.gnome.gnome-keyring.enable = cfg.keyring;
+    security.pam.services.sddm.enableGnomeKeyring = cfg.keyring;
 
     # Sway appear in the list
     programs.sway.enable = cfg.sway;
