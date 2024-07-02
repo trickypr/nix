@@ -91,6 +91,18 @@ in
             { criteria = "eDP-1"; scale = 1.25; }
           ];
         }
+        {
+          profile.name = "tricky-fw-desk";
+          profile.exec = [
+            "${pkgs.sway}/bin/swaymsg workspace 1, move workspace to DP-3"
+            "${pkgs.sway}/bin/swaymsg workspace 2, move workspace to DP-6"
+          ];
+          profile.outputs = [
+            { criteria = "eDP-1"; status = "disable"; }
+            { criteria = "DP-3"; position = "0,600";  }
+            { criteria = "DP-6"; transform = "90"; position = "3840,0"; }
+          ];
+        }
       ];
     };
 
