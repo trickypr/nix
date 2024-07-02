@@ -27,6 +27,7 @@ in
 
       # needed by treesitter
       pkgs.clang
+      pkgs.clang-tools
     ];
 
     programs.neovim = {
@@ -37,7 +38,7 @@ in
     };
 
     xdg.configFile."nvim" = {
-      source = config.lib.file.mkOutOfStoreSymlink ./nvim-conf;
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nix/modules/home-manager/nvim-conf";
       recursive = true;
     };
   };

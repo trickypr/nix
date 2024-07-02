@@ -24,6 +24,8 @@
   networking.networkmanager.enable = true;
   networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
 
+  services.desktopManager.plasma6.enable = true;
+
   catppuccin.flavor = "mocha";
   catppuccin.enable = true;
 
@@ -58,6 +60,7 @@
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
+  hardware.steam-hardware.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh = {

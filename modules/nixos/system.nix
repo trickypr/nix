@@ -7,6 +7,7 @@
 
     # Enable CUPS to print documents.
     services.printing.enable = true;
+    services.flatpak.enable = true;
 
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
@@ -41,5 +42,33 @@
       # no need to redefine it in your config for now)
       #media-session.enable = true;
     };
+
+    programs.nix-ld.enable = true;
+    programs.nix-ld.libraries = with pkgs; [
+      gtk3
+      alsa-lib
+      xorg.libX11
+      xorg.libxcb
+      xorg.libXcomposite
+      xorg.libXext
+      xorg.libXdamage
+      xorg.libXrandr
+      xorg.libXfixes
+      xorg.libXcursor
+      xorg.libXrender
+      xorg.libXi
+      freetype
+      pango
+      cairo
+      fontconfig
+      gtk3
+      atk
+      gdk-pixbuf
+      gtk3
+      glib
+      dbus
+      pciutils
+      libGL
+    ];
   };
 }

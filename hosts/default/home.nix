@@ -37,6 +37,7 @@
     vscode = { enable = true; vim = true; };
 
     dev = {
+      direnv = true;
       beam = { enable = true; vscode = true; };
       js = true;
     };
