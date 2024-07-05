@@ -59,6 +59,7 @@ in
           {command = "sleep 10 && ${pkgs.lxqt.lxqt-policykit
 }/bin/lxqt-policykit-agent";}
           {command = "sleep 30 && ${pkgs._1password-gui}/bin/1password --silent";}
+          {command = "sleep 30 && ${pkgs.networkmanagerapplet}/bin/nm-applet";} 
         ];
 
         input."2362:628:PIXA3854:00_093A:0274_Touchpad" = {

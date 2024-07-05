@@ -39,6 +39,7 @@
     dev = {
       direnv = true;
       beam = { enable = true; vscode = true; };
+      haskell = { enable = false; vscode = false; };
       js = true;
     };
 

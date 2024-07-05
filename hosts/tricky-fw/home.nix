@@ -39,6 +39,7 @@
     dev = {
       beam = { enable = true; vscode = true; };
       elm = true;
+      haskell = { enable = false; vscode = false; };
       js = true;
       rust = true;
     };
