@@ -33,7 +33,7 @@
   };
   environment.systemPackages = with pkgs; [ fprintd ];
 
-  catppuccin.flavor = "mocha";
+  catppuccin.flavor = "latte";
   catppuccin.enable = true;
 
 
@@ -61,6 +61,9 @@
   # 1password __MUST__ be installed as root
   programs._1password.enable = true;
   programs._1password-gui.enable = true;
+
+  networking.firewall.enable = false;
+  virtualisation.podman.enable = true;
 
   # steam __MUST__ be installed as root
   # programs.steam = {

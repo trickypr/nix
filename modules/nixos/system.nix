@@ -17,7 +17,10 @@
     environment.systemPackages = with pkgs; [
       wget
       kitty
+      kdePackages.okular
+      kdePackages.qtwayland
       networkmanagerapplet
+      zathura
 
       fira-code-nerdfont
       fira-code

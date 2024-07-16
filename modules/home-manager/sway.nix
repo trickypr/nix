@@ -178,7 +178,7 @@ in
           color: #292c3c;
         }
 
-        #pulseaudio-slider trough, #backlight-slider trough {
+        trough {
           min-height: 10px;
           min-width: 80px;
         }

@@ -21,6 +21,8 @@ in
       pkgs.nil
       pkgs.elmPackages.elm-language-server
       pkgs.rust-analyzer
+      pkgs.ltex-ls
+      pkgs.templ
 
       # clipboard support
       pkgs.wl-clipboard

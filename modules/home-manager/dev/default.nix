@@ -6,5 +6,6 @@
     ./haskell.nix
     ./js.nix
     ./rust.nix
+    ./typst.nix
   ];
 }

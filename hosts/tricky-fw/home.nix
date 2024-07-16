@@ -42,6 +42,7 @@
       haskell = { enable = false; vscode = false; };
       js = true;
       rust = true;
+      typst = { enable = true; nvim = true; };
     };
 
     _1password = {
@@ -50,6 +51,10 @@
     };
   };
 
+  services.kdeconnect = {
+    enable = true;
+    indicator = true;
+  };
   services.mpd = {
     enable = true;
     musicDirectory = "~/Music";
@@ -61,21 +66,23 @@
 '';
   };
 
-  home.packages = [
-    pkgs.gnome.nautilus
-    pkgs.firefox-devedition-bin
-    pkgs.firefox
-    pkgs.obs-studio
-    pkgs.vlc
-    pkgs.gnupg
+  home.packages = with pkgs; [
+    nautilus
+    firefox-devedition-bin
+    firefox
+    obs-studio
+    vlc
+    gnupg
 
-    pkgs.file
-    pkgs.fzf
-    pkgs.ripgrep
-    pkgs.tree
+    file
+    fzf
+    ripgrep
+    tree
+
+    obsidian
   ];
 
-  catppuccin.flavor = "mocha";
+  catppuccin.flavor = "latte";
   catppuccin.enable = true;
   gtk.enable = true;
   gtk.theme = {

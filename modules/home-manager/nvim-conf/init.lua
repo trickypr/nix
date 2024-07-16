@@ -126,7 +126,7 @@ require("lazy").setup({
     priority = 1000,
     lazy = false,
     opts = {
-      flavour = "mocha"
+      flavour = "latte"
     },
     config = function(_, opts)
       require("catppuccin").setup(opts)
@@ -196,6 +196,11 @@ require("lazy").setup({
         clangd = {},
         cssls = {},
         html = {},
+        typst_lsp = {},
+        templ = {},
+        ltex = {
+          filetypes = { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc", "quarto", "rmd", "context", "html", "xhtml", "mail", "text", "typst" }
+        },
       }
     },
     ---@param opts PluginLspOpts
