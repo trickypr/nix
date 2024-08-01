@@ -22,11 +22,26 @@
     homeManager = import ./home.nix;
   };
 
+  users.users."kiosk" = {
+    isNormalUser = true;
+    description = "Kisok User";
+    extraGroups = ["networkmanager"];
+    packages = [pkgs.firefox];
+  };
+
   networking.hostName = "tricky-fw"; 
   networking.networkmanager.enable = true;
   networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   services.tailscale.enable = true;
+  services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.package = pkgs.mullvad-vpn;
+  services.desktopManager.plasma6.enable = true;
 
+  services.devmon.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
+
+  services.printing.enable = true;
   services.fwupd.enable = true;
   services.fprintd = {
     enable = true;
@@ -53,9 +68,15 @@
       keyring = true;
       sway = true;
     };
+    
+    keyboard = {
+      enable = true;
+      caps = true;
+    };
   };
 
   programs.neovim.enable = true;
+  programs.direnv.enable = true;
   programs.neovim.defaultEditor = true;
 
   # 1password __MUST__ be installed as root

@@ -14,6 +14,10 @@ in
       pkgs.zsh-powerlevel10k
     ];
 
+    home.sessionPath = [
+      "/home/trickypr/.local/share/JetBrains/Toolbox/scripts"
+    ];
+
     programs.zsh = {
       enable = true;
       enableCompletion = true;

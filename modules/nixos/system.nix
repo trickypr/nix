@@ -7,12 +7,24 @@
 
     # Enable CUPS to print documents.
     services.printing.enable = true;
+    services.printing.drivers = [ pkgs.brlaser ];
     services.flatpak.enable = true;
+
+    services.avahi = {
+      enable = true;
+      nssmdns = true;
+      openFirewall = true;
+    };
 
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
 
     security.polkit.enable = true;
+
+    programs.java = {
+      enable = true;
+      package = (pkgs.jdk17.override { enableJavaFX = true; });
+    };
 
     environment.systemPackages = with pkgs; [
       wget
@@ -21,16 +33,20 @@
       kdePackages.qtwayland
       networkmanagerapplet
       zathura
+      system-config-printer
 
       fira-code-nerdfont
       fira-code
       usbutils
       pciutils
+
+      jetbrains-toolbox
+      javaPackages.openjfx17
     ];
     fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
 
     # Enable sound with pipewire.
-    sound.enable = false; # https://github.com/NixOS/nixpkgs/issues/319809
+    # sound.enable = false; # https://github.com/NixOS/nixpkgs/issues/319809
     hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
     services.pipewire = {
@@ -72,6 +88,12 @@
       dbus
       pciutils
       libGL
+      libxkbcommon
+      glibc
+
+      vulkan-loader
+      glfw
+      wayland
     ];
   };
 }

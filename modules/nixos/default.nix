@@ -5,6 +5,7 @@
     ./cbr.nix 
     ./devenv.nix
     ./sddm.nix
+    ./keyboard.nix
     ./system.nix
   ];
 }

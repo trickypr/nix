@@ -23,6 +23,8 @@ in
       pkgs.rust-analyzer
       pkgs.ltex-ls
       pkgs.templ
+      pkgs.go
+      pkgs.gopls
 
       # clipboard support
       pkgs.wl-clipboard

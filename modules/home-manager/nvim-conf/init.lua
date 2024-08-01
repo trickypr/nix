@@ -41,20 +41,8 @@ keymap("n", "<leader>|", ":vsplit<cr>")
 vim.keymap.set("n", "[e", diagnostic_goto(true, "ERROR"))
 vim.keymap.set("n", "]e", diagnostic_goto(false, "ERROR"))
 
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("lsp", { clear = true }),
-  callback = function(args)
-    -- 2
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      -- 3
-      buffer = args.buf,
-      callback = function()
-        -- 4 + 5
-        vim.lsp.buf.format { async = false, id = args.data.client_id }
-      end,
-    })
-  end
-})
+vim.keymap.set("n", "[w", diagnostic_goto(true, "WARN"))
+vim.keymap.set("n", "]w", diagnostic_goto(false, "WARN"))
 
 require("lazy").setup({
   {
@@ -192,6 +180,7 @@ require("lazy").setup({
         nil_ls = {}, -- Nixos
         rust_analyzer = {},
         gleam = {},
+        gopls = {},
         tsserver = {},
         clangd = {},
         cssls = {},
@@ -220,6 +209,21 @@ require("lazy").setup({
     keys = {
       { "<leader>cr", function() return ":IncRename" .. vim.fn.expand("<cword>") end, desc = "Rename symbol" },
     },
+  },
+  {
+    "elentok/format-on-save.nvim",
+    event = "VeryLazy",
+
+    config = function(_, _)
+      local format_on_save = require("format-on-save")
+      local formatters = require("format-on-save.formatters")
+
+      format_on_save.setup({
+        formatter_by_ft = {
+          templ = formatters.shell({ cmd = {"templ", "fmt"} })
+        }
+      })
+    end
   },
 
 
