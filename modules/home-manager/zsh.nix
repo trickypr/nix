@@ -18,10 +18,13 @@ in
       "/home/trickypr/.local/share/JetBrains/Toolbox/scripts"
     ];
 
+    programs.zellij = {
+      enable = true;
+    };
     programs.zsh = {
       enable = true;
       enableCompletion = true;
-      initExtra = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme; source ~/.config/.p10k.zsh";
+      initExtra = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme; source ~/.config/.p10k.zsh\nalias x='${pkgs.zellij}/bin/zellij'";
       autosuggestion = {
         enable = true;
       };
