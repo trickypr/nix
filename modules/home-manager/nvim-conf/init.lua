@@ -217,10 +217,13 @@ require("lazy").setup({
     config = function(_, _)
       local format_on_save = require("format-on-save")
       local formatters = require("format-on-save.formatters")
+      local format_with_lsp = require("format-on-save.format-with-lsp")
 
       format_on_save.setup({
         formatter_by_ft = {
-          templ = formatters.shell({ cmd = {"templ", "fmt"} })
+          templ = formatters.shell({ cmd = {"templ", "fmt"} }),
+          typst = format_with_lsp("typst_lsp")
+          
         }
       })
     end
