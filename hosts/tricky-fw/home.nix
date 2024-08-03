@@ -86,7 +86,7 @@
   catppuccin.enable = true;
   gtk.enable = true;
   gtk.theme = {
-    name = "Adwaita-dark";
+    name = "Adwaita";
     package = pkgs.gnome.gnome-themes-extra;
   };
 

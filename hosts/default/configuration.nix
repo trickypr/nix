@@ -26,7 +26,7 @@
 
   services.desktopManager.plasma6.enable = true;
 
-  catppuccin.flavor = "mocha";
+  catppuccin.flavor = "latte";
   catppuccin.enable = true;
 
   # Applies tricky's configs

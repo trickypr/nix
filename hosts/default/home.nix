@@ -67,7 +67,7 @@
     pkgs.ktailctl
   ];
 
-  catppuccin.flavor = "mocha";
+  catppuccin.flavor = "latte";
   catppuccin.enable = true;
 
   programs.git = {
