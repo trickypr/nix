@@ -35,12 +35,14 @@
 
     nvim = { enable = true; default = true; };
     vscode = { enable = true; vim = true; };
+    kdevelop = { enable = true; };
 
     dev = {
       direnv = true;
       beam = { enable = true; vscode = true; };
       haskell = { enable = false; vscode = false; };
       js = true;
+      kirigami = true;
     };
 
     _1password = {
@@ -61,6 +63,8 @@
     pkgs.fzf
     pkgs.ripgrep
     pkgs.tree
+
+    pkgs.ktailctl
   ];
 
   catppuccin.flavor = "mocha";

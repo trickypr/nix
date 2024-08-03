@@ -19,6 +19,7 @@ in
         pkgs.vscode-extensions.catppuccin.catppuccin-vsc
         pkgs.vscode-extensions.catppuccin.catppuccin-vsc-icons
         pkgs.vscode-extensions.ms-vscode.cpptools-extension-pack
+        pkgs.vscode-extensions.bbenoist.nix
       ] ++ lib.optionals cfg.vim [
         pkgs.vscode-extensions.vscodevim.vim
         pkgs.vscode-extensions.ms-vscode.cpptools
