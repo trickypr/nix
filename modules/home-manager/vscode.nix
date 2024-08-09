@@ -20,9 +20,9 @@ in
         pkgs.vscode-extensions.catppuccin.catppuccin-vsc-icons
         pkgs.vscode-extensions.ms-vscode.cpptools-extension-pack
         pkgs.vscode-extensions.bbenoist.nix
+        pkgs.vscode-extensions.ms-vscode.cpptools
       ] ++ lib.optionals cfg.vim [
         pkgs.vscode-extensions.vscodevim.vim
-        pkgs.vscode-extensions.ms-vscode.cpptools
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         { name = "keyboard-quickfix"; publisher = "pascalsenn"; version = "0.0.6"; sha256 = "sha256-BK7ND6gtRVEitxaokJHmQ5rvSOgssVz+s9dktGQnY6M="; }
       ];

@@ -6,6 +6,7 @@
     ./devenv.nix
     ./sddm.nix
     ./keyboard.nix
+    ./lpmd.nix
     ./system.nix
   ];
 }

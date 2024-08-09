@@ -35,6 +35,7 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 vim.opt.clipboard = 'unnamedplus'
 
+vim.wo.number = true
 vim.wo.relativenumber = true
 
 keymap("n", "<leader>|", ":vsplit<cr>")

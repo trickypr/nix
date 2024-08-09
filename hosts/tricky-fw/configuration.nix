@@ -15,12 +15,18 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  environment.systemPackages = [
+    pkgs.fprintd
+  ];
+
   main-user = {
     enable = true;
     userName = vars.user;
     sshKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGKZ4NodCumS5eW/0G1xJZ3/MIpKwVxTRhJLodcR5BZg";
     homeManager = import ./home.nix;
   };
+
+  services.lpmd.enable = true;
 
   users.users."kiosk" = {
     isNormalUser = true;
@@ -33,9 +39,12 @@
   networking.networkmanager.enable = true;
   networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   services.tailscale.enable = true;
-  services.mullvad-vpn.enable = true;
-  services.mullvad-vpn.package = pkgs.mullvad-vpn;
   services.desktopManager.plasma6.enable = true;
+
+  # Note: Mullvad will not work without systemd-resolved enabled
+  # Note: Disabled for boot performace
+  # services.mullvad-vpn.enable = true;
+  # services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
   services.devmon.enable = true;
   services.gvfs.enable = true;
@@ -46,7 +55,6 @@
   services.fprintd = {
     enable = true;
   };
-  environment.systemPackages = with pkgs; [ fprintd ];
 
   catppuccin.flavor = "latte";
   catppuccin.enable = true;

@@ -62,6 +62,9 @@
       #media-session.enable = true;
     };
 
+    # Electron wayland
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
     programs.nix-ld.enable = true;
     programs.nix-ld.libraries = with pkgs; [
       gtk3

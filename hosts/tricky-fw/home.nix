@@ -45,6 +45,10 @@
       typst = { enable = true; nvim = true; };
     };
 
+    sudoku = {
+      comp2120 = true;
+    };
+
     _1password = {
       enable = true;
       signingKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGKZ4NodCumS5eW/0G1xJZ3/MIpKwVxTRhJLodcR5BZg";
