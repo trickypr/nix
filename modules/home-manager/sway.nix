@@ -129,7 +129,7 @@ in
 
           modules-left = [ "sway/workspaces" ];
           modules-center = [ "clock" ];
-          modules-right = [ "tray" "group/volume" "group/backlight" "battery" ];
+          modules-right = [ "tray" "group/volume" "group/backlight" "power-profiles-daemon" "battery" ];
 
           "group/volume" = {
             orientation = "horizontal";
@@ -157,6 +157,18 @@ in
           backlight = {
             format = "{icon}   {percent}%";
             format-icons = ["" ""];
+          };
+
+          power-profiles-daemon = {
+            format = "{icon}";
+            tooltip-format = "Power profile: {profile}\nDriver: {driver}";
+            tooltip = true;
+            format-icons = {
+              default = "";
+              performance = "";
+              balanced = "";
+              power-saver = "";
+            };
           };
 
           battery = {

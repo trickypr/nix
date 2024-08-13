@@ -10,23 +10,14 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ lpmd-pkg ];
     services.dbus.packages = [ lpmd-pkg ];
     systemd.packages = [ lpmd-pkg ];
+    environment.systemPackages = [ 
+      lpmd-pkg
+    ];
 
-   # systemd.services.lpmd = {
-   #   enable = true;
-   #   description = "Intel Low Power Daemon Service";
-   #   wantedBy = [ "multi-user.target" ];
-   #   # aliases = [ "org.freedesktop.intel_lpmd.service" ];
-
-   #   serviceConfig = {
-   #     Type = "dbus";
-   #     SuccessExitStatus = "2";
-   #     BusName = "org.freedesktop.intel_lpmd";
-   #     ExecStart = "${lpmd-pkg}/bin/intel_lpmd --systemd --dbus-enable";
-   #     Restart = "on-failure";
-   #   };
-   # };
+    systemd.services.intel_lpmd = {
+      enable = true;
+    };
   };
 }

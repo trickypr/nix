@@ -2,7 +2,7 @@
 
 stdenv.mkDerivation rec {
   pname = "lpmd";
-  version = "0.0.6";
+  version = "branch";
 
   src = fetchgit {
     url = "https://github.com/endgame/intel-lpmd";
@@ -21,6 +21,12 @@ stdenv.mkDerivation rec {
     "--with-dbus-sys-dir=${placeholder "out"}/etc/dbus-1/system.d"
   ];
   outputs = [ "out" ];
+
+  # We wil handle systemd services within the module, but we want all of the dbus
+  # stuff to get setup
+  postInstall = ''
+    rm -rf ${placeholder "out"}/lib/systemd/system
+  '';
 
   meta = with lib; {
     description = "Intel's power management daemon";
