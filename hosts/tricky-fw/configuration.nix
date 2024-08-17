@@ -91,7 +91,10 @@
 
   # 1password __MUST__ be installed as root
   programs._1password.enable = true;
-  programs._1password-gui.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = ["trickypr"];
+  };
 
   networking.firewall.enable = false;
   virtualisation.podman.enable = true;

@@ -279,6 +279,7 @@ require("lazy").setup({
     event = "VeryLazy",
     keys = {
       { "<leader><space>", "<cmd>Telescope find_files<cr>", desc = "Find Files (Root Dir)" },
+      { "<leader>g", "<cmd>Telescope live_grep<cr>", desc = "Find Files (Root Dir)" },
     },
   },
   {

@@ -16,7 +16,6 @@ in
       pkgs.wofi
       pkgs.swaybg
       pkgs.acpi
-      pkgs.lxqt.lxqt-policykit
     ];
 
     programs.kitty.enable = true;
@@ -59,8 +58,8 @@ in
           {command = "waybar";}
           {command = "swaybg --color 11111b --mode center --image /etc/nixos/kitppuccin.png";}
           {command = "sleep 5 && systemctl --user start kanshi.service";}
-          {command = "sleep 10 && ${pkgs.lxqt.lxqt-policykit
-}/bin/lxqt-policykit-agent";}
+          {command = "sleep 10 && ${pkgs.polkit_gnome
+}/libexec/polkit-gnome-authentication-agent-1";}
           {command = "sleep 30 && ${pkgs._1password-gui}/bin/1password --silent";}
           {command = "sleep 30 && ${pkgs.networkmanagerapplet}/bin/nm-applet";} 
         ];
