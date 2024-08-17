@@ -1,7 +1,10 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 
 let
   cfg = config.t.sway;
+  modifier = "Mod4";
+# TODO: make this arch independant
+  hyprmag = inputs.hyprmag.packages."x86_64-linux".hyprmag;
 in
 {
   options = {
@@ -22,7 +25,7 @@ in
       enable = true;
       catppuccin.enable = true;
       config = {
-        modifier = "Mod4";
+        modifier = modifier;
         terminal = "kitty";
         bars = [];
         colors = {
@@ -50,7 +53,7 @@ in
           };
         };
         gaps = {
-            inner = 8;
+            inner = 4;
         };
         startup = [
           {command = "waybar";}
@@ -64,7 +67,26 @@ in
 
         input."2362:628:PIXA3854:00_093A:0274_Touchpad" = {
           natural_scroll = "enabled";
-          scroll_factor = "0.2";
+          scroll_factor = "0.4";
+        };
+
+        keybindings = lib.mkOptionDefault {
+          "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl --device intel_backlight --min-value=1 set 5%-";
+          "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl --device intel_backlight set 5%+";
+
+          "XF86AudioRaiseVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +10%";
+          "XF86AudioLowerVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -10%";
+          "XF86AudioMute" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
+
+          # Screenshot binding modifiers:
+          # Shift = expand
+          # Mod = Save to disk
+          "Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy window";
+          "Shift+Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy";
+          "${modifier}+Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot save window";
+          "${modifier}+Shift+Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot save";
+
+          "${modifier}+m" = "exec ${hyprmag}/bin/hyprmag";
         };
       };
     };

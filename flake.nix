@@ -9,6 +9,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprmag.url = "github:SIMULATAN/hyprmag";
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {

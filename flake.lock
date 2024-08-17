@@ -72,6 +72,24 @@
         "type": "github"
       }
     },
+    "hyprmag": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1717888083,
+        "narHash": "sha256-Ntb+lvscDzOAGOJo+xOtjRrjdIDW6HpAtehlh5VipV8=",
+        "owner": "SIMULATAN",
+        "repo": "hyprmag",
+        "rev": "a7ca558d357e2a0d34373620f89d2daf210744dc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SIMULATAN",
+        "repo": "hyprmag",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1716358718,
@@ -89,6 +107,22 @@
       }
     },
     "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1683014792,
+        "narHash": "sha256-6Va9iVtmmsw4raBc3QKvQT2KT/NGRWlvUlJj46zN8B8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "1a411f23ba299db155a5b45d5e145b85a7aafc42",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1722813957,
         "narHash": "sha256-IAoYyYnED7P8zrBFMnmp7ydaJfwTnwcnqxUElC1I26Y=",
@@ -109,7 +143,8 @@
         "_1password-shell-plugins": "_1password-shell-plugins",
         "catppuccin": "catppuccin",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs_2"
+        "hyprmag": "hyprmag",
+        "nixpkgs": "nixpkgs_3"
       }
     },
     "systems": {
