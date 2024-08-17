@@ -39,11 +39,11 @@ vim.wo.number = true
 vim.wo.relativenumber = true
 
 keymap("n", "<leader>|", ":vsplit<cr>")
-vim.keymap.set("n", "[e", diagnostic_goto(true, "ERROR"))
-vim.keymap.set("n", "]e", diagnostic_goto(false, "ERROR"))
+vim.keymap.set("n", "]e", diagnostic_goto(true, "ERROR"))
+vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"))
 
-vim.keymap.set("n", "[w", diagnostic_goto(true, "WARN"))
-vim.keymap.set("n", "]w", diagnostic_goto(false, "WARN"))
+vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"))
+vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"))
 
 require("lazy").setup({
   {
@@ -174,6 +174,7 @@ require("lazy").setup({
     event = "VeryLazy",
     opts = {
       servers = {
+        dafny = {},
         jsonls = {},
         lua_ls = {},
         elixirls = {},

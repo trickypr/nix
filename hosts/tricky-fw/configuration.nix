@@ -40,6 +40,8 @@
   networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
   services.tailscale.enable = true;
   services.desktopManager.plasma6.enable = true;
+  services.gitlab-runner.enable = true;
+  virtualisation.docker.enable = true;
 
   # Note: Mullvad will not work without systemd-resolved enabled
   # Note: Disabled for boot performace

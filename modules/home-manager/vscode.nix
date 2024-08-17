@@ -25,6 +25,7 @@ in
         pkgs.vscode-extensions.vscodevim.vim
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         { name = "keyboard-quickfix"; publisher = "pascalsenn"; version = "0.0.6"; sha256 = "sha256-BK7ND6gtRVEitxaokJHmQ5rvSOgssVz+s9dktGQnY6M="; }
+        { name = "ide-vscode"; publisher = "dafny-lang"; version = "3.3.1"; sha256 = "sha256-4oxdgRzUx8p84gvov0nTUTg6yjoCLt4yaZaovDMi+b4="; }
       ];
 
       userSettings = {

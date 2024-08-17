@@ -42,6 +42,8 @@
 
       jetbrains-toolbox
       javaPackages.openjfx17
+      dotnet-runtime
+      dafny
     ];
     fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
 
