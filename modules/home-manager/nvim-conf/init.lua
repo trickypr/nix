@@ -183,6 +183,7 @@ require("lazy").setup({
         rust_analyzer = {},
         gleam = {},
         gopls = {},
+        pyright = {},
         tsserver = {},
         clangd = {},
         cssls = {},

@@ -25,6 +25,8 @@ in
       pkgs.templ
       pkgs.go
       pkgs.gopls
+      # pkgs.python311Packages.python-lsp-server
+      pkgs.pyright
 
       # clipboard support
       pkgs.wl-clipboard

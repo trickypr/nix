@@ -19,6 +19,7 @@ in
     ];
 
     programs.kitty.enable = true;
+    catppuccin.pointerCursor.enable = false;
 
     wayland.windowManager.sway = {
       enable = true;
@@ -70,6 +71,8 @@ in
         };
 
         keybindings = lib.mkOptionDefault {
+          "${modifier}+d" = "exec ${pkgs.fuzzel}/bin/fuzzel";
+
           "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl --device intel_backlight --min-value=1 set 5%-";
           "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl --device intel_backlight set 5%+";
 
