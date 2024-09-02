@@ -43,7 +43,7 @@
       jetbrains-toolbox
       javaPackages.openjfx17
       dotnet-runtime
-      dafny
+      wireshark
     ];
     fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
 

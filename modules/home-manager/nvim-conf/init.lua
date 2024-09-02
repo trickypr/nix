@@ -14,10 +14,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-function keymap(mode, keybind, command)
-  vim.api.nvim_set_keymap(mode, keybind, command, { noremap = true, silent = true })
-end
-
 local diagnostic_goto = function(next, severity)
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
   severity = severity and vim.diagnostic.severity[severity] or nil
@@ -31,6 +27,7 @@ vim.o.smarttab = true
 vim.o.expandtab = true
 vim.o.shiftwidth = 2
 vim.o.tabstop = 2
+
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 vim.opt.clipboard = 'unnamedplus'
@@ -38,7 +35,6 @@ vim.opt.clipboard = 'unnamedplus'
 vim.wo.number = true
 vim.wo.relativenumber = true
 
-keymap("n", "<leader>|", ":vsplit<cr>")
 vim.keymap.set("n", "]e", diagnostic_goto(true, "ERROR"))
 vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"))
 
@@ -211,7 +207,7 @@ require("lazy").setup({
     "smjonas/inc-rename.nvim",
     config = true,
     keys = {
-      { "<leader>cr", function() return ":IncRename" .. vim.fn.expand("<cword>") end, desc = "Rename symbol" },
+      { "<leader>cr", function() return ":IncRename " .. vim.fn.expand("<cword>") end, desc = "Rename symbol", expr = true },
     },
   },
   {
@@ -280,7 +276,7 @@ require("lazy").setup({
     event = "VeryLazy",
     keys = {
       { "<leader><space>", "<cmd>Telescope find_files<cr>", desc = "Find Files (Root Dir)" },
-      { "<leader>g", "<cmd>Telescope live_grep<cr>", desc = "Find Files (Root Dir)" },
+      { "<leader>pg", "<cmd>Telescope live_grep<cr>", desc = "Find Files (Root Dir)" },
     },
   },
   {
@@ -288,7 +284,7 @@ require("lazy").setup({
     dependencies = { 'nvim-lua/plenary.nvim' },
     event = "VeryLazy",
     keys = {
-      { "<leader>sw", "<cmd>lua require(\"spectre\").open_visual({select_word=true})<CR>", desc = "Find and replace (word)" },
+      { "<leader>pr", "<cmd>lua require(\"spectre\").open_visual({select_word=true})<CR>", desc = "Find and replace (word)" },
     },
   },
 
