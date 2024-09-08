@@ -22,7 +22,7 @@ in
    users.users.${cfg.userName} = {
      isNormalUser = true;
      description = "main user";
-     extraGroups = [ "networkmanager" "wheel" "docker" "storage" "uinput" "power" ];
+     extraGroups = [ "networkmanager" "wheel" "docker" "storage" "uinput" "power" "wireshark" ];
      shell = pkgs.zsh;
      openssh.authorizedKeys.keys = [cfg.sshKey];
    };

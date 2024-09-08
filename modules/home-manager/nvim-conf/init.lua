@@ -45,24 +45,16 @@ require("lazy").setup({
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    opts = {
-      defaults = {
-        [" "] = { "<cmd>Telescope find_files<cr>", "Find Files (Root Dir)" },
-        ["|"] = { "<cmd>vsplit<cr>", "Split right" },
-        ["-"] = { "<cmd>split<cr>", "Split down" },
-
-        ["ca"] = { function() vim.lsp.buf.code_action() end, "Code action" },
-        ["[e"] = { diagnostic_goto(true, "ERROR"), "Go to last error" },
-        ["]e"] = { diagnostic_goto(false, "ERROR"), "Go to next error" },
-
-        e = { "<cmd>Explore<cr>", "Explore containing folder" }
-      },
+    opts = {},
+    keys = {
+      { "<leader> ",  "<cmd>Telescope find_files<cr>",          desc = "Find Files (Root Dir)" },
+      { "<leader>-",  "<cmd>split<cr>",                         desc = "Split down" },
+      { "<leader>[e", function() vim.lsp.buf.code_action() end, desc = "Go to last error" },
+      { "<leader>]e", diagnostic_goto(true, "ERROR"),           desc = "Go to next error" },
+      { "<leader>ca", diagnostic_goto(false, "ERROR"),          desc = "Code action" },
+      { "<leader>e",  "<cmd>Explore<cr>",                       desc = "Explore containing folder" },
+      { "<leader>|",  "<cmd>vsplit<cr>",                        desc = "Split right" },
     },
-    config = function(_, opts)
-      local wk = require("which-key")
-      wk.setup(opts)
-      wk.register(opts.defaults, { prefix = "<leader>" })
-    end,
   },
   {
     "ahmedkhalf/project.nvim",
@@ -135,33 +127,56 @@ require("lazy").setup({
   },
   {
     "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
     dependencies = {
-      "folke/which-key.nvim",
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-    },
-
-    opts = {
-      sources = {
-        { name = "nvim_lsp" },
-        { name = "lazydev", group_index = 0 }
-      }
+      "hrsh7th/cmp-buffer",           -- source for text in buffer
+      "hrsh7th/cmp-path",             -- source for file system paths in commands
+      "L3MON4D3/LuaSnip",             -- snippet engine
+      "saadparwaiz1/cmp_luasnip",     -- for lua autocompletion
+      "rafamadriz/friendly-snippets", -- useful snippets library
+      "onsails/lspkind.nvim",         -- vs-code like pictograms
     },
 
     config = function(_, opts)
       local cmp = require("cmp")
-      local wk = require("which-key")
+      local luasnip = require("luasnip")
+      local lspkind = require("lspkind")
+
+      -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
+      require("luasnip.loaders.from_vscode").lazy_load()
 
       cmp.setup({
+        completion = {
+          completeopt = "menu,menuone,preview,noselect",
+        },
+        snippet = { -- configure how nvim-cmp interacts with snippet engine
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
         mapping = cmp.mapping.preset.insert({
-          ['<C-j>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-k>'] = cmp.mapping.scroll_docs(4),
-          ['<C-Space>'] = cmp.mapping.complete(),
-          ['<C-e>'] = cmp.mapping.abort(),
-          ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ["<C-n>"] = cmp.mapping.select_prev_item(), -- previous suggestion
+          ["<C-p>"] = cmp.mapping.select_next_item(), -- next suggestion
+          ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-d>"] = cmp.mapping.scroll_docs(4),
+          ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
+          ["<C-e>"] = cmp.mapping.abort(),        -- close completion window
+          ["<CR>"] = cmp.mapping.confirm({ select = false }),
         }),
-        sources = opts.sources
+        -- sources for autocompletion
+        sources = cmp.config.sources({
+          { name = "nvim_lsp" },
+          { name = "luasnip" }, -- snippets
+          { name = "buffer" },  -- text within current buffer
+          { name = "path" },    -- file system paths
+        }),
+        -- configure lspkind for vs-code like pictograms in completion menu
+        formatting = {
+          format = lspkind.cmp_format({
+            maxwidth = 50,
+            ellipsis_char = "...",
+          }),
+        },
       })
     end
   },
@@ -180,7 +195,7 @@ require("lazy").setup({
         gleam = {},
         gopls = {},
         pyright = {},
-        tsserver = {},
+        ts_ls = {},
         clangd = {},
         cssls = {},
         html = {},
@@ -211,22 +226,25 @@ require("lazy").setup({
     },
   },
   {
-    "elentok/format-on-save.nvim",
-    event = "VeryLazy",
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        lua = { "stylua" },
+        -- Conform will run multiple formatters sequentially
+        python = { "isort", "black" },
+        -- You can customize some of the format options for the filetype (:help conform.format)
+        rust = { "rustfmt", lsp_format = "fallback" },
+        -- Conform will run the first available formatter
+        javascript = { "prettierd", "prettier", stop_after_first = true },
+        gleam = { "gleam" },
+      },
 
-    config = function(_, _)
-      local format_on_save = require("format-on-save")
-      local formatters = require("format-on-save.formatters")
-      local format_with_lsp = require("format-on-save.format-with-lsp")
-
-      format_on_save.setup({
-        formatter_by_ft = {
-          templ = formatters.shell({ cmd = {"templ", "fmt"} }),
-          typst = format_with_lsp("typst_lsp")
-          
-        }
-      })
-    end
+      format_on_save = {
+        -- These options will be passed to conform.format()
+        timeout_ms = 500,
+        lsp_format = "fallback",
+      },
+    }
   },
 
 
@@ -276,7 +294,7 @@ require("lazy").setup({
     event = "VeryLazy",
     keys = {
       { "<leader><space>", "<cmd>Telescope find_files<cr>", desc = "Find Files (Root Dir)" },
-      { "<leader>pg", "<cmd>Telescope live_grep<cr>", desc = "Find Files (Root Dir)" },
+      { "<leader>pg",      "<cmd>Telescope live_grep<cr>",  desc = "Find Files (Root Dir)" },
     },
   },
   {

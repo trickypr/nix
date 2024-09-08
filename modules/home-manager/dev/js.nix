@@ -16,6 +16,7 @@ in
       pkgs.nodejs_22
       pkgs.nodePackages.pnpm
       pkgs.typescript
+      pkgs.prettierd
     ];
   };
 }

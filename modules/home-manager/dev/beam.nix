@@ -16,7 +16,9 @@ in
       pkgs.elixir-ls
       pkgs.elixir
       pkgs.gleam
-      pkgs.erlang
+      pkgs.erlang_27
+      pkgs.rebar3
+      pkgs.inotify-tools
     ];
 
     programs.vscode = lib.mkIf cfg.vscode {

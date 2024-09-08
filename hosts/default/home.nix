@@ -72,7 +72,7 @@
 
   programs.git = {
     enable = true;
-    userEmail = "23250792+trickypr@users.noreply.github.com";
+    userEmail = "git@trickypr.com";
     userName = "trickypr";
   };
 

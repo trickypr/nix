@@ -43,9 +43,10 @@
       jetbrains-toolbox
       javaPackages.openjfx17
       dotnet-runtime
-      wireshark
     ];
     fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
+    programs.wireshark.enable = true;
+    programs.wireshark.package = pkgs.wireshark;
 
     # Enable sound with pipewire.
     # sound.enable = false; # https://github.com/NixOS/nixpkgs/issues/319809

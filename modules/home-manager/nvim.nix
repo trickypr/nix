@@ -34,6 +34,9 @@ in
       # needed by treesitter
       pkgs.clang
       pkgs.clang-tools
+
+      # formatters
+      pkgs.stylua
     ];
 
     programs.neovim = {
