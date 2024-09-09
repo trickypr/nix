@@ -32,6 +32,7 @@
   t = {
     zsh = true;
     sway = true;
+    vnc = true;
 
     nvim = { enable = true; default = true; };
     vscode = { enable = true; vim = true; };
@@ -65,6 +66,7 @@
     pkgs.tree
 
     pkgs.ktailctl
+    pkgs.prismlauncher
   ];
 
   catppuccin.flavor = "latte";

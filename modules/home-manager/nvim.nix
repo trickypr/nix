@@ -27,6 +27,8 @@ in
       pkgs.gopls
       # pkgs.python311Packages.python-lsp-server
       pkgs.pyright
+      pkgs.nodePackages_latest.svelte-language-server
+      pkgs.prettierd
 
       # clipboard support
       pkgs.wl-clipboard

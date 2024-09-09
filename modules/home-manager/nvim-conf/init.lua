@@ -205,6 +205,7 @@ require("lazy").setup({
           filetypes = { "bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", "tex", "pandoc", "quarto", "rmd", "context", "html", "xhtml", "mail", "text", "typst" }
         },
         qmlls = {},
+        svelte = {},
       }
     },
     ---@param opts PluginLspOpts

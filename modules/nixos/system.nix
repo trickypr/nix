@@ -2,7 +2,7 @@
   config = {
     nix.settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      system-features = [ "benchmark" "big-parallel" "kvm" "nixos-test" ];
+      system-features = [ "benchmark" "big-parallel" "kvm" "nixos-test" "gccarch-znver4" ];
     };
 
     # Enable CUPS to print documents.
@@ -34,6 +34,7 @@
       networkmanagerapplet
       zathura
       system-config-printer
+      waypipe
 
       fira-code-nerdfont
       fira-code

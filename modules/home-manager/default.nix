@@ -5,6 +5,7 @@
     ./kdevelop.nix
     ./sudoku.nix
     ./sway.nix
+    ./vnc.nix
     ./vscode.nix
     ./zsh.nix
 

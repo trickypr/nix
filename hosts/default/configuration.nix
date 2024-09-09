@@ -13,6 +13,12 @@
       inputs.home-manager.nixosModules.default
     ];
 
+  # nixpkgs.hostPlatform = {
+  #   gcc.arch = "znver4";
+  #   gcc.tune = "znver4";
+  #   system = "x86_64-linux";
+  # };
+
   main-user = {
     enable = true;
     userName = vars.user;
@@ -24,7 +30,10 @@
   networking.networkmanager.enable = true;
   networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
 
-  services.desktopManager.plasma6.enable = true;
+  # services.desktopManager.plasma6.enable = true;
+
+  services.xserver.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
   catppuccin.flavor = "latte";
   catppuccin.enable = true;
