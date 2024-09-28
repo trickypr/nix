@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.t.nvim;
@@ -12,7 +17,9 @@ in
   config = lib.mkIf cfg.enable {
     # Needed for LSPs to function
     t.dev = {
-      beam = { enable = true; };
+      beam = {
+        enable = true;
+      };
       js = true;
     };
 
@@ -25,10 +32,11 @@ in
       pkgs.templ
       pkgs.go
       pkgs.gopls
-      # pkgs.python311Packages.python-lsp-server
+      pkgs.python311Packages.python-lsp-server
       pkgs.pyright
       pkgs.nodePackages_latest.svelte-language-server
       pkgs.prettierd
+      pkgs.pylyzer
 
       # clipboard support
       pkgs.wl-clipboard

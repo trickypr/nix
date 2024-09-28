@@ -1,8 +1,18 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   config = {
     nix.settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-      system-features = [ "benchmark" "big-parallel" "kvm" "nixos-test" "gccarch-znver4" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      system-features = [
+        "benchmark"
+        "big-parallel"
+        "kvm"
+        "nixos-test"
+        "gccarch-znver4"
+      ];
     };
 
     # Enable CUPS to print documents.
@@ -26,6 +36,11 @@
       package = (pkgs.jdk17.override { enableJavaFX = true; });
     };
 
+    environment.sessionVariables = {
+      PATH_TO_FX = "${pkgs.jdk17.override { enableJavaFX = true; }}/lib/openjdk/lib";
+      JAVA_ROOM = "${pkgs.jdk17.override { enableJavaFX = true; }}";
+    };
+
     environment.systemPackages = with pkgs; [
       wget
       kitty
@@ -35,6 +50,7 @@
       zathura
       system-config-printer
       waypipe
+      opusfile
 
       fira-code-nerdfont
       fira-code
@@ -59,7 +75,7 @@
       alsa.support32Bit = true;
       pulse.enable = true;
       # If you want to use JACK applications, uncomment this
-      #jack.enable = true;
+      jack.enable = true;
 
       # use the example session manager (no others are packaged yet so this is enabled by default,
       # no need to redefine it in your config for now)
