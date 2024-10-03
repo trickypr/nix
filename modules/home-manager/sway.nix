@@ -1,9 +1,15 @@
-{ lib, config, pkgs, inputs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 let
   cfg = config.t.sway;
   modifier = "Mod4";
-# TODO: make this arch independant
+  # TODO: make this arch independant
   hyprmag = inputs.hyprmag.packages."x86_64-linux".hyprmag;
 in
 {
@@ -21,7 +27,7 @@ in
     programs.kitty.enable = true;
     catppuccin.pointerCursor.enable = false;
 
-    home.pointerCursor =  {
+    home.pointerCursor = {
       gtk.enable = true;
       package = pkgs.posy-cursors;
       name = "Posy_Cursor_Black";
@@ -34,7 +40,7 @@ in
       config = {
         modifier = modifier;
         terminal = "kitty";
-        bars = [];
+        bars = [ ];
         colors = {
           background = "$base";
           focused = {
@@ -60,16 +66,17 @@ in
           };
         };
         gaps = {
-            inner = 4;
+          inner = 4;
         };
         startup = [
-          {command = "waybar";}
-          {command = "swaybg --color 11111b --mode center --image /etc/nixos/kitppuccin.png";}
-          {command = "sleep 5 && systemctl --user start kanshi.service";}
-          {command = "sleep 10 && ${pkgs.polkit_gnome
-}/libexec/polkit-gnome-authentication-agent-1";}
-          {command = "sleep 30 && ${pkgs._1password-gui}/bin/1password --silent";}
-          {command = "sleep 30 && ${pkgs.networkmanagerapplet}/bin/nm-applet";} 
+          { command = "waybar"; }
+          { command = "swaybg --color 11111b --mode center --image /etc/nixos/kitppuccin.png"; }
+          { command = "sleep 5 && systemctl --user start kanshi.service"; }
+          {
+            command = "sleep 10 && ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          }
+          { command = "sleep 30 && ${pkgs._1password-gui}/bin/1password --silent"; }
+          { command = "sleep 30 && ${pkgs.networkmanagerapplet}/bin/nm-applet"; }
         ];
 
         input."2362:628:PIXA3854:00_093A:0274_Touchpad" = {
@@ -98,13 +105,22 @@ in
       settings = [
         {
           profile.name = "tricky-desktop";
-          profile.exec = [ 
+          profile.exec = [
             "${pkgs.sway}/bin/swaymsg workspace 1, move workspace to DP-2"
             "${pkgs.sway}/bin/swaymsg workspace 2, move workspace to DP-3"
           ];
           profile.outputs = [
-            { criteria = "DP-2"; position = "0,600";scale = 1.25;   }
-            { criteria = "DP-3"; transform = "90"; position = "3840,0";scale = 1.25;  }
+            {
+              criteria = "DP-2";
+              position = "0,600";
+              scale = 1.25;
+            }
+            {
+              criteria = "DP-3";
+              transform = "90";
+              position = "3840,0";
+              scale = 1.25;
+            }
           ];
         }
         {
@@ -113,7 +129,10 @@ in
             "${pkgs.sway}/bin/swaymsg workspace 1, move workspace to eDP-1"
           ];
           profile.outputs = [
-            { criteria = "eDP-1"; scale = 1.25; }
+            {
+              criteria = "eDP-1";
+              scale = 1.25;
+            }
           ];
         }
         {
@@ -123,9 +142,21 @@ in
             "${pkgs.sway}/bin/swaymsg workspace 2, move workspace to DP-6"
           ];
           profile.outputs = [
-            { criteria = "eDP-1"; status = "disable"; }
-            { criteria = "DP-3"; position = "0,600"; scale = 1.25;  }
-            { criteria = "DP-6"; transform = "90"; position = "3840,0"; scale = 1.25;  }
+            {
+              criteria = "eDP-1";
+              status = "disable";
+            }
+            {
+              criteria = "DP-3";
+              position = "0,600";
+              scale = 1.25;
+            }
+            {
+              criteria = "DP-6";
+              transform = "90";
+              position = "3840,0";
+              scale = 1.25;
+            }
           ];
         }
         {
@@ -135,9 +166,21 @@ in
             "${pkgs.sway}/bin/swaymsg workspace 2, move workspace to DP-5"
           ];
           profile.outputs = [
-            { criteria = "eDP-1"; status = "disable"; }
-            { criteria = "DP-3"; position = "0,600"; scale = 1.25;  }
-            { criteria = "DP-5"; transform = "90"; position = "3840,0"; scale = 1.25; }
+            {
+              criteria = "eDP-1";
+              status = "disable";
+            }
+            {
+              criteria = "DP-3";
+              position = "0,600";
+              scale = 1.25;
+            }
+            {
+              criteria = "DP-5";
+              transform = "90";
+              position = "3840,0";
+              scale = 1.25;
+            }
           ];
         }
       ];
@@ -153,21 +196,33 @@ in
 
           modules-left = [ "sway/workspaces" ];
           modules-center = [ "clock" ];
-          modules-right = [ "tray" "group/volume" "group/backlight" "power-profiles-daemon" "battery" ];
+          modules-right = [
+            "tray"
+            "group/volume"
+            "group/backlight"
+            "power-profiles-daemon"
+            "battery"
+          ];
 
           "group/volume" = {
             orientation = "horizontal";
             drawer = {
               transition-duration = 200;
             };
-            modules = [ "pulseaudio" "pulseaudio/slider" ];
+            modules = [
+              "pulseaudio"
+              "pulseaudio/slider"
+            ];
           };
 
           pulseaudio = {
-             format = "{icon}   {volume}%";
-             format-icons = {
-               default = ["" ""];
-             };
+            format = "{icon}   {volume}%";
+            format-icons = {
+              default = [
+                ""
+                ""
+              ];
+            };
           };
 
           "group/backlight" = {
@@ -175,12 +230,18 @@ in
             drawer = {
               transition-duration = 200;
             };
-            modules = [ "backlight" "backlight/slider" ];
+            modules = [
+              "backlight"
+              "backlight/slider"
+            ];
           };
 
           backlight = {
             format = "{icon}   {percent}%";
-            format-icons = ["" ""];
+            format-icons = [
+              ""
+              ""
+            ];
           };
 
           power-profiles-daemon = {
@@ -197,7 +258,13 @@ in
 
           battery = {
             format = "{icon}   {capacity}%";
-            format-icons = ["" "" "" "" ""];
+            format-icons = [
+              ""
+              ""
+              ""
+              ""
+              ""
+            ];
           };
         };
       };

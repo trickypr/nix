@@ -3,15 +3,14 @@
 
 { inputs, vars, ... }:
 {
-  imports =
-    [ 
-      # You will need to generate a hardware configuration with hardware by running
-      # > sudo nixos-generate-config
-      # and copying the result from /etc/nixos
-      ./hardware-configuration.nix
-      ../../modules/nixos
-      inputs.home-manager.nixosModules.default
-    ];
+  imports = [
+    # You will need to generate a hardware configuration with hardware by running
+    # > sudo nixos-generate-config
+    # and copying the result from /etc/nixos
+    ./hardware-configuration.nix
+    ../../modules/nixos
+    inputs.home-manager.nixosModules.default
+  ];
 
   # nixpkgs.hostPlatform = {
   #   gcc.arch = "znver4";
@@ -26,9 +25,9 @@
     homeManager = import ./home.nix;
   };
 
-  networking.hostName = "tricky-desktop"; 
+  networking.hostName = "tricky-desktop";
   networking.networkmanager.enable = true;
-  networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
 
   # services.desktopManager.plasma6.enable = true;
 
@@ -53,6 +52,7 @@
       enable = true;
       keyring = true;
       sway = true;
+      sway-vnc = true;
     };
   };
 
