@@ -87,14 +87,7 @@ in
           "XF86AudioLowerVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -10%";
           "XF86AudioMute" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
 
-          # Screenshot binding modifiers:
-          # Shift = expand
-          # Mod = Save to disk
-          "Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy window";
-          "Shift+Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy";
-          "${modifier}+Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot save window";
-          "${modifier}+Shift+Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot save";
-
+          "Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot savecopy anything";
           "${modifier}+m" = "exec ${hyprmag}/bin/hyprmag";
         };
       };
@@ -110,8 +103,8 @@ in
             "${pkgs.sway}/bin/swaymsg workspace 2, move workspace to DP-3"
           ];
           profile.outputs = [
-            { criteria = "DP-2"; position = "0,600";  }
-            { criteria = "DP-3"; transform = "90"; position = "3840,0"; }
+            { criteria = "DP-2"; position = "0,600";scale = 1.25;   }
+            { criteria = "DP-3"; transform = "90"; position = "3840,0";scale = 1.25;  }
           ];
         }
         {
@@ -131,8 +124,8 @@ in
           ];
           profile.outputs = [
             { criteria = "eDP-1"; status = "disable"; }
-            { criteria = "DP-3"; position = "0,600";  }
-            { criteria = "DP-6"; transform = "90"; position = "3840,0"; }
+            { criteria = "DP-3"; position = "0,600"; scale = 1.25;  }
+            { criteria = "DP-6"; transform = "90"; position = "3840,0"; scale = 1.25;  }
           ];
         }
         {
@@ -143,8 +136,8 @@ in
           ];
           profile.outputs = [
             { criteria = "eDP-1"; status = "disable"; }
-            { criteria = "DP-3"; position = "0,600";  }
-            { criteria = "DP-5"; transform = "90"; position = "3840,0"; }
+            { criteria = "DP-3"; position = "0,600"; scale = 1.25;  }
+            { criteria = "DP-5"; transform = "90"; position = "3840,0"; scale = 1.25; }
           ];
         }
       ];
