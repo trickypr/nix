@@ -47,6 +47,8 @@ in
 
       # formatters
       pkgs.stylua
+      
+      pkgs.bat
     ];
 
     programs.neovim = {

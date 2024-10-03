@@ -36,6 +36,8 @@
       package = (pkgs.jdk17.override { enableJavaFX = true; });
     };
 
+    services.safeeyes.enable = true;
+
     environment.sessionVariables = {
       PATH_TO_FX = "${pkgs.jdk17.override { enableJavaFX = true; }}/lib/openjdk/lib";
       JAVA_ROOM = "${pkgs.jdk17.override { enableJavaFX = true; }}";
@@ -59,11 +61,14 @@
 
       jetbrains-toolbox
       javaPackages.openjfx17
-      dotnet-runtime
+
+      man-pages
+      man-pages-posix
     ];
     fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
     programs.wireshark.enable = true;
     programs.wireshark.package = pkgs.wireshark;
+    documentation.dev.enable = true;
 
     # Enable sound with pipewire.
     # sound.enable = false; # https://github.com/NixOS/nixpkgs/issues/319809
@@ -93,6 +98,7 @@
       xorg.libxcb
       xorg.libXcomposite
       xorg.libXext
+      xorg.libXtst
       xorg.libXdamage
       xorg.libXrandr
       xorg.libXfixes

@@ -109,6 +109,22 @@
   networking.firewall.enable = false;
   virtualisation.podman.enable = true;
 
+  programs.command-not-found.enable = false;
+  programs.zsh.interactiveShellInit = ''
+          # This function is called whenever a command is not found.
+        command_not_found_handler() {
+          local p=${pkgs.comma}/bin/comma
+          if [ -x $p ]; then
+            # Run the helper program.
+            $p "$@"
+          else
+            # Indicate than there was an error so ZSH falls back to its default handler
+            echo "$1: command not found" >&2
+            return 127
+          fi
+        }
+  '';
+
   # steam __MUST__ be installed as root
   # programs.steam = {
   #   enable = true;

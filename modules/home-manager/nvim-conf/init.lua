@@ -61,7 +61,7 @@ require("lazy").setup({
 			{
 				"<leader>ca",
 				function()
-					vim.lsp.buf.code_action()
+					require("tiny-code-action").code_action()
 				end,
 				desc = "Code action",
 			},
@@ -106,7 +106,11 @@ require("lazy").setup({
 		"folke/noice.nvim",
 		event = "VeryLazy",
 		opts = {
-			presets = { inc_rename = true },
+			presets = {
+				inc_rename = true,
+				command_palette = true,
+				lsp_doc_border = true,
+			},
 		},
 		dependencies = {
 			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
@@ -117,6 +121,12 @@ require("lazy").setup({
 			"rcarriga/nvim-notify",
 		},
 	},
+	{
+		"rcarriga/nvim-notify",
+		lazy = true,
+		opts = { render = "compact" },
+	},
+
 	{ -- Theme
 		"catppuccin/nvim",
 		name = "catppuccin",
@@ -237,8 +247,8 @@ require("lazy").setup({
 					end,
 				},
 				mapping = cmp.mapping.preset.insert({
-					["<C-n>"] = cmp.mapping.select_prev_item(), -- previous suggestion
-					["<C-p>"] = cmp.mapping.select_next_item(), -- next suggestion
+					["<C-p>"] = cmp.mapping.select_prev_item(), -- previous suggestion
+					["<C-n>"] = cmp.mapping.select_next_item(), -- next suggestion
 					["<C-u>"] = cmp.mapping.scroll_docs(-4),
 					["<C-d>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
@@ -335,6 +345,15 @@ require("lazy").setup({
 				desc = "Quickfix List (Trouble)",
 			},
 		},
+	},
+	{
+		"rachartier/tiny-code-action.nvim",
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-telescope/telescope.nvim" },
+		},
+		event = "LspAttach",
+		opts = {},
 	},
 
 	{
