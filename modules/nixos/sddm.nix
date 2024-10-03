@@ -48,8 +48,8 @@ in
           export WAYLAND_DISPLAY=wayland-1
           export XDG_RUNTIME_DIR=/tmp
           export XDG_SESSION_TYPE=wayland
-          sway &
-          wayvnc --output=HEADLESS-1
+          ${pkgs.sway} &
+          ${pkgs.wayvnc} --output=HEADLESS-1
         '';
       };
     };
