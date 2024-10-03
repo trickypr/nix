@@ -47,6 +47,7 @@ in
 
       # formatters
       pkgs.stylua
+      pkgs.nixfmt-rfc-style
       
       pkgs.bat
     ];

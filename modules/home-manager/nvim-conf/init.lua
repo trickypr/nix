@@ -299,6 +299,7 @@ require("lazy").setup({
 				javascript = { "prettierd", "prettier", stop_after_first = true },
 				markdown = { "prettierd", "injected" },
 				gleam = { "gleam" },
+				nix = { "nixfmt" },
 			},
 
 			format_on_save = {

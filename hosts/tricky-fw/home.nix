@@ -92,7 +92,7 @@
   gtk.enable = true;
   gtk.theme = {
     name = "Adwaita";
-    package = pkgs.gnome.gnome-themes-extra;
+    package = pkgs.gnome-themes-extra;
   };
 
   programs.git = {
