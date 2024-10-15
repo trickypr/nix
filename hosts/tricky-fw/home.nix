@@ -1,4 +1,10 @@
-{ config, pkgs, inputs, vars, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  vars,
+  ...
+}:
 
 {
   imports = [
@@ -34,16 +40,31 @@
     zsh = true;
     sway = true;
 
-    nvim = { enable = true; default = true; };
-    vscode = { enable = true; vim = true; };
+    nvim = {
+      enable = true;
+      default = true;
+    };
+    vscode = {
+      enable = true;
+      vim = true;
+    };
 
     dev = {
-      beam = { enable = true; vscode = true; };
+      beam = {
+        enable = true;
+        vscode = true;
+      };
       elm = true;
-      haskell = { enable = false; vscode = false; };
+      haskell = {
+        enable = false;
+        vscode = false;
+      };
       js = true;
       rust = true;
-      typst = { enable = true; nvim = true; };
+      typst = {
+        enable = true;
+        nvim = true;
+      };
     };
 
     sudoku = {
@@ -64,17 +85,16 @@
     enable = true;
     musicDirectory = "~/Music";
     extraConfig = ''
-  audio_output {
-    type "pipewire"
-    name "Pipewire"
-  }
-'';
+      audio_output {
+        type "pipewire"
+        name "Pipewire"
+      }
+    '';
   };
 
   home.packages = with pkgs; [
     nautilus
     firefox-devedition-bin
-    firefox
     obs-studio
     vlc
     gnupg

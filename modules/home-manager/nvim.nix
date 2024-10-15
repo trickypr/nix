@@ -37,6 +37,7 @@ in
       pkgs.nodePackages_latest.svelte-language-server
       pkgs.prettierd
       pkgs.pylyzer
+      pkgs.vhdl-ls
 
       # clipboard support
       pkgs.wl-clipboard
@@ -48,7 +49,7 @@ in
       # formatters
       pkgs.stylua
       pkgs.nixfmt-rfc-style
-      
+
       pkgs.bat
     ];
 

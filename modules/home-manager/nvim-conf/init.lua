@@ -31,6 +31,7 @@ vim.o.tabstop = 2
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 vim.opt.clipboard = "unnamedplus"
+vim.o.colorcolumn = "80"
 
 vim.wo.number = true
 vim.wo.relativenumber = true
@@ -204,6 +205,7 @@ require("lazy").setup({
 					},
 				},
 				qmlls = {},
+				vhdl_ls = {},
 			},
 		},
 		---@param opts PluginLspOpts
