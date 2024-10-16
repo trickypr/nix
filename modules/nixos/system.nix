@@ -38,9 +38,18 @@
 
     services.safeeyes.enable = true;
 
+    hardware.graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+        intel-media-driver # LIBVA_DRIVER_NAME=iHD
+        libvdpau-va-gl
+      ];
+    };
+
     environment.sessionVariables = {
       PATH_TO_FX = "${pkgs.jdk17.override { enableJavaFX = true; }}/lib/openjdk/lib";
       JAVA_ROOM = "${pkgs.jdk17.override { enableJavaFX = true; }}";
+      LIBVA_DRIVER_NAME = "iHD";
     };
 
     environment.systemPackages = with pkgs; [
