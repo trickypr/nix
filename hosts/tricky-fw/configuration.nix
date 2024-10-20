@@ -1,17 +1,21 @@
 # Partial documentation available via
 # > man configuration.nix
 
-{ inputs, vars, pkgs, ... }:
 {
-  imports =
-    [ 
-      # You will need to generate a hardware configuration with hardware by running
-      # > sudo nixos-generate-config
-      # and copying the result from /etc/nixos
-      ./hardware-configuration.nix
-      ../../modules/nixos
-      inputs.home-manager.nixosModules.default
-    ];
+  inputs,
+  vars,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    # You will need to generate a hardware configuration with hardware by running
+    # > sudo nixos-generate-config
+    # and copying the result from /etc/nixos
+    ./hardware-configuration.nix
+    ../../modules/nixos
+    inputs.home-manager.nixosModules.default
+  ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -31,18 +35,21 @@
   users.users."kiosk" = {
     isNormalUser = true;
     description = "Kisok User";
-    extraGroups = ["networkmanager"];
-    packages = [pkgs.firefox];
+    extraGroups = [ "networkmanager" ];
+    packages = [ pkgs.firefox ];
   };
 
-  networking.hostName = "tricky-fw"; 
+  networking.hostName = "tricky-fw";
   networking.networkmanager.enable = true;
-  networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
   services.tailscale.enable = true;
   services.desktopManager.plasma6.enable = true;
   services.gitlab-runner.enable = true;
   virtualisation.docker.enable = true;
-  virtualisation.docker.listenOptions = ["/run/docker.sock" "tcp://127.0.0.1:2375"];
+  virtualisation.docker.listenOptions = [
+    "/run/docker.sock"
+    "tcp://127.0.0.1:2375"
+  ];
 
   # Note: Mullvad will not work without systemd-resolved enabled
   # Note: Disabled for boot performace
@@ -54,7 +61,10 @@
     enable = true;
     # dnssec = "true";
     domains = [ "~." ];
-    fallbackDns = [ "1.1.1.1#one.one.one.one" "1.0.0.1#one.one.one.one" ];
+    fallbackDns = [
+      "1.1.1.1#one.one.one.one"
+      "1.0.0.1#one.one.one.one"
+    ];
     # dnsovertls = "true";
   };
 
@@ -70,7 +80,6 @@
 
   catppuccin.flavor = "latte";
   catppuccin.enable = true;
-
 
   # Applies tricky's configs
   t = {
@@ -88,7 +97,7 @@
       keyring = true;
       sway = true;
     };
-    
+
     keyboard = {
       enable = true;
       caps = true;
@@ -103,7 +112,7 @@
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
-    polkitPolicyOwners = ["trickypr"];
+    polkitPolicyOwners = [ "trickypr" ];
   };
 
   networking.firewall.enable = false;
@@ -111,19 +120,24 @@
 
   programs.command-not-found.enable = false;
   programs.zsh.interactiveShellInit = ''
-          # This function is called whenever a command is not found.
-        command_not_found_handler() {
-          local p=${pkgs.comma}/bin/comma
-          if [ -x $p ]; then
-            # Run the helper program.
-            $p "$@"
-          else
-            # Indicate than there was an error so ZSH falls back to its default handler
-            echo "$1: command not found" >&2
-            return 127
-          fi
-        }
+      # This function is called whenever a command is not found.
+    command_not_found_handler() {
+      local p=${pkgs.comma}/bin/comma
+      if [ -x $p ]; then
+        # Run the helper program.
+        $p "$@"
+      else
+        # Indicate than there was an error so ZSH falls back to its default handler
+        echo "$1: command not found" >&2
+        return 127
+      fi
+    }
   '';
+
+  programs.obs-studio = {
+    enable = true;
+    enableVirtualCamera = true;
+  };
 
   # steam __MUST__ be installed as root
   # programs.steam = {
@@ -133,11 +147,11 @@
   # };
 
   # Enable the OpenSSH daemon.
- #services.openssh = {
- #  enable = true;
- #  settings.PasswordAuthentication = false;
- #  settings.KbdInteractiveAuthentication = false;
- #};
+  #services.openssh = {
+  #  enable = true;
+  #  settings.PasswordAuthentication = false;
+  #  settings.KbdInteractiveAuthentication = false;
+  #};
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
