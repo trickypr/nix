@@ -29,10 +29,10 @@
   networking.networkmanager.enable = true;
   networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
 
-  # services.desktopManager.plasma6.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
-  services.xserver.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
 
   catppuccin.flavor = "latte";
   catppuccin.enable = true;
@@ -58,6 +58,7 @@
     keyboard = {
       enable = true;
       caps = true;
+      gmeta = true;
     };
   };
 
