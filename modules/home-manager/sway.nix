@@ -86,6 +86,7 @@ in
 
         keybindings = lib.mkOptionDefault {
           "${modifier}+d" = "exec ${pkgs.fuzzel}/bin/fuzzel";
+          "${modifier}+SHIFT+d" = "exec ${pkgs.fuzzel}/bin/fuzzel";
 
           "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl --device intel_backlight --min-value=1 set 5%-";
           "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl --device intel_backlight set 5%+";
@@ -207,8 +208,44 @@ in
             }
           ];
         }
+        {
+          profile.name = "tricky-fw-desk4";
+          profile.exec = [
+            "${pkgs.sway}/bin/swaymsg workspace 1, move workspace to DP-3"
+            "${pkgs.sway}/bin/swaymsg workspace 2, move workspace to DP-2"
+          ];
+          profile.outputs = [
+            {
+              criteria = "eDP-1";
+              status = "disable";
+            }
+            {
+              criteria = "DP-3";
+              position = "0,600";
+              scale = 1.25;
+            }
+            {
+              criteria = "DP-2";
+              transform = "90";
+              position = "3840,0";
+              scale = 1.25;
+            }
+          ];
+        }
       ];
     };
+
+    programs.rofi = {
+      enable = true;
+      package = pkgs.rofi-wayland;
+    };
+
+    home.file.".config/rofi/selector.rasi".text = ''
+      configuration {
+        modi: "drun";
+        show-icon: true;
+      }
+    '';
 
     programs.waybar = {
       enable = true;

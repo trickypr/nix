@@ -101,6 +101,7 @@
     keyboard = {
       enable = true;
       caps = true;
+      gmeta = true;
     };
   };
 
