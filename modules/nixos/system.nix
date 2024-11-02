@@ -102,6 +102,20 @@
     # Electron wayland
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
+    # resolved is required for mullvad
+    # for some reason, this also fixes my home internet, because the netadmin
+    # has broken a couple of things
+    services.resolved = {
+      enable = true;
+      # dnssec = "true";
+      domains = [ "~." ];
+      fallbackDns = [
+        "1.1.1.1#one.one.one.one"
+        "1.0.0.1#one.one.one.one"
+      ];
+      # dnsovertls = "true";
+    };
+
     programs.nix-ld.enable = true;
     programs.nix-ld.libraries = with pkgs; [
       gtk3

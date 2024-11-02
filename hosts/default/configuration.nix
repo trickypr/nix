@@ -54,6 +54,11 @@
       sway = true;
       sway-vnc = true;
     };
+
+    keyboard = {
+      enable = true;
+      caps = true;
+    };
   };
 
   programs.neovim.enable = true;
