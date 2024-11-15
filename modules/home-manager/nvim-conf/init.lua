@@ -125,7 +125,7 @@ require("lazy").setup({
 	{
 		"rcarriga/nvim-notify",
 		lazy = true,
-		opts = { render = "compact" },
+		opts = { render = "compact", top_down = false },
 	},
 
 	{ -- Theme
@@ -181,6 +181,7 @@ require("lazy").setup({
 				clangd = {},
 				cssls = {},
 				html = {},
+				svelte = {},
 				typst_lsp = {},
 				templ = {},
 				ltex = {
@@ -206,6 +207,7 @@ require("lazy").setup({
 				},
 				qmlls = {},
 				vhdl_ls = {},
+				hls = {},
 			},
 		},
 		---@param opts PluginLspOpts
@@ -304,11 +306,11 @@ require("lazy").setup({
 				nix = { "nixfmt" },
 			},
 
-			--format_on_save = {
-			--	-- These options will be passed to conform.format()
-			--	timeout_ms = 500,
-			--	lsp_format = "fallback",
-			--},
+			format_on_save = {
+				-- These options will be passed to conform.format()
+				timeout_ms = 500,
+				lsp_format = "fallback",
+			},
 		},
 	},
 

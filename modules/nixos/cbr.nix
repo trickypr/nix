@@ -1,5 +1,5 @@
 # Locale management
-{config, lib, ...}:
+{ config, lib, ... }:
 
 let
   cfg = config.t.cbr;

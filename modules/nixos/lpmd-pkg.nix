@@ -1,4 +1,21 @@
-{ stdenv, fetchgit, lib, automake, autoconf, autoconf-archive, gcc, glib, dbus-glib, gtk-doc, pkg-config, libxml2, libnl, systemdLibs, tree, autoreconfHook }:
+{
+  stdenv,
+  fetchgit,
+  lib,
+  automake,
+  autoconf,
+  autoconf-archive,
+  gcc,
+  glib,
+  dbus-glib,
+  gtk-doc,
+  pkg-config,
+  libxml2,
+  libnl,
+  systemdLibs,
+  tree,
+  autoreconfHook,
+}:
 
 stdenv.mkDerivation rec {
   pname = "lpmd";
@@ -12,12 +29,25 @@ stdenv.mkDerivation rec {
 
   doCheck = true;
 
-  buildInputs = [ automake autoconf autoconf-archive gcc glib dbus-glib gtk-doc pkg-config libxml2 libnl systemdLibs tree ];
+  buildInputs = [
+    automake
+    autoconf
+    autoconf-archive
+    gcc
+    glib
+    dbus-glib
+    gtk-doc
+    pkg-config
+    libxml2
+    libnl
+    systemdLibs
+    tree
+  ];
 
   nativeBuildInputs = [ autoreconfHook ];
-  configureFlags  = [ 
-    "--localstatedir=/var" 
-    "--with-systemdsystemunitdir=${placeholder "out"}/lib/systemd/system" 
+  configureFlags = [
+    "--localstatedir=/var"
+    "--with-systemdsystemunitdir=${placeholder "out"}/lib/systemd/system"
     "--with-dbus-sys-dir=${placeholder "out"}/etc/dbus-1/system.d"
   ];
   outputs = [ "out" ];

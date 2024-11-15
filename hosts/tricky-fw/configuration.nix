@@ -102,6 +102,7 @@
       enable = true;
       caps = true;
       gmeta = true;
+      dlayer = true;
     };
   };
 
