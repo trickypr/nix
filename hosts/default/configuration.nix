@@ -1,7 +1,7 @@
 # Partial documentation available via
 # > man configuration.nix
 
-{ inputs, vars, ... }:
+{ inputs, vars, pkgs, ... }:
 {
   imports = [
     # You will need to generate a hardware configuration with hardware by running
@@ -29,6 +29,7 @@
   networking.networkmanager.enable = true;
   networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
 
+  services.xserver.enable = true;
   services.desktopManager.plasma6.enable = true;
 
   # services.xserver.enable = true;
@@ -75,7 +76,18 @@
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
-  hardware.steam-hardware.enable = true;
+
+  # Needed to get async reprojection working
+  boot.kernelPatches = [
+    {
+      name = "amdgpu-ignore-ctx-privileges";
+      patch = pkgs.fetchpatch {
+        name = "cap_sys_nice_begone.patch";
+        url = "https://github.com/Frogging-Family/community-patches/raw/master/linux61-tkg/cap_sys_nice_begone.mypatch";
+        hash = "sha256-Y3a0+x2xvHsfLax/uwycdJf3xLxvVfkfDVqjkxNaYEo=";
+      };
+    }
+  ];
 
   # Enable the OpenSSH daemon.
   services.openssh = {

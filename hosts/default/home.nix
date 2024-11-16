@@ -1,4 +1,10 @@
-{ config, pkgs, inputs, vars, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  vars,
+  ...
+}:
 
 {
   imports = [
@@ -34,14 +40,28 @@
     sway = true;
     vnc = true;
 
-    nvim = { enable = true; default = true; };
-    vscode = { enable = true; vim = true; };
-    kdevelop = { enable = true; };
+    nvim = {
+      enable = true;
+      default = true;
+    };
+    vscode = {
+      enable = true;
+      vim = true;
+    };
+    kdevelop = {
+      enable = true;
+    };
 
     dev = {
       direnv = true;
-      beam = { enable = true; vscode = true; };
-      haskell = { enable = false; vscode = false; };
+      beam = {
+        enable = true;
+        vscode = true;
+      };
+      haskell = {
+        enable = false;
+        vscode = false;
+      };
       js = true;
       kirigami = true;
     };
@@ -55,7 +75,6 @@
   home.packages = [
     pkgs.gnome.nautilus
     pkgs.firefox-devedition-bin
-    pkgs.firefox
     pkgs.obs-studio
     pkgs.vlc
     pkgs.gnupg
