@@ -48,9 +48,6 @@
       enable = true;
       vim = true;
     };
-    kdevelop = {
-      enable = true;
-    };
 
     dev = {
       direnv = true;

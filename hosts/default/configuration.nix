@@ -1,7 +1,12 @@
 # Partial documentation available via
 # > man configuration.nix
 
-{ inputs, vars, pkgs, ... }:
+{
+  inputs,
+  vars,
+  pkgs,
+  ...
+}:
 {
   imports = [
     # You will need to generate a hardware configuration with hardware by running
@@ -60,6 +65,7 @@
       enable = true;
       caps = true;
       gmeta = true;
+      dlayer = true;
     };
   };
 
