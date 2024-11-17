@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
   version = "branch";
 
   src = fetchgit {
-    url = "https://github.com/endgame/intel-lpmd";
+    url = "https://github.com/intel/intel-lpmd";
     rev = "b2832748aead9f0c4dbbaecc8d13a2e7147a82a2";
     sha256 = "bDzqbroO11ZQi4TfhW0KbzYtYwM4WYNFkPE52fKpa9Q=";
   };

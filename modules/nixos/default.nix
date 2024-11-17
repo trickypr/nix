@@ -1,8 +1,9 @@
 {
-  imports = [ 
+  imports = [
     ./main-user.nix
-    ./boot 
-    ./cbr.nix 
+    ./boot
+    ./bluetooth.nix
+    ./cbr.nix
     ./devenv.nix
     ./sddm.nix
     ./keyboard.nix

@@ -73,10 +73,11 @@ in
           { command = "swaybg --color 11111b --mode center --image /etc/nixos/kitppuccin.png"; }
           { command = "sleep 5 && systemctl --user start kanshi.service"; }
           {
-            command = "sleep 10 && ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+            command = "sleep 6 && ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
           }
-          { command = "sleep 30 && ${pkgs._1password-gui}/bin/1password --silent"; }
-          { command = "sleep 30 && ${pkgs.networkmanagerapplet}/bin/nm-applet"; }
+          { command = "sleep 10 && ${pkgs._1password-gui}/bin/1password --silent"; }
+          { command = "sleep 10 && ${pkgs.networkmanagerapplet}/bin/nm-applet"; }
+          { command = "sleep 10 && ${pkgs.blueman}/bin/blueman"; }
         ];
 
         input."2362:628:PIXA3854:00_093A:0274_Touchpad" = {

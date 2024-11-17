@@ -44,12 +44,6 @@
   networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
   services.tailscale.enable = true;
   services.desktopManager.plasma6.enable = true;
-  services.gitlab-runner.enable = true;
-  virtualisation.docker.enable = true;
-  virtualisation.docker.listenOptions = [
-    "/run/docker.sock"
-    "tcp://127.0.0.1:2375"
-  ];
 
   # Note: Mullvad will not work without systemd-resolved enabled
   # Note: Disabled for boot performace
@@ -89,8 +83,10 @@
 
     # Locale management
     cbr.enable = true;
-
     devenv.enable = true;
+
+    # System
+    bluetooth = true;
 
     dm = {
       enable = true;
@@ -117,12 +113,9 @@
     polkitPolicyOwners = [ "trickypr" ];
   };
 
-  networking.firewall.enable = false;
-  virtualisation.podman.enable = true;
-
   programs.command-not-found.enable = false;
   programs.zsh.interactiveShellInit = ''
-      # This function is called whenever a command is not found.
+    # This function is called whenever a command is not found.
     command_not_found_handler() {
       local p=${pkgs.comma}/bin/comma
       if [ -x $p ]; then
@@ -135,11 +128,6 @@
       fi
     }
   '';
-
-  programs.obs-studio = {
-    enable = true;
-    enableVirtualCamera = true;
-  };
 
   # steam __MUST__ be installed as root
   # programs.steam = {

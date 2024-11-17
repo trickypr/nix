@@ -45,14 +45,14 @@
       default = true;
     };
     vscode = {
-      enable = true;
+      enable = false;
       vim = true;
     };
 
     dev = {
       beam = {
         enable = true;
-        vscode = true;
+        vscode = false;
       };
       elm = true;
       haskell = {

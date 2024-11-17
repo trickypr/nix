@@ -14,35 +14,41 @@ in
   };
 
   config = lib.mkIf cfg {
-    home.packages = [
-      pkgs.zsh-powerlevel10k
-    ];
-
     home.sessionPath = [
       "/home/trickypr/.local/share/JetBrains/Toolbox/scripts"
     ];
 
+    programs.command-not-found.enable = false;
+    programs.nix-index-database.comma.enable = true;
+    programs.nix-index.enableZshIntegration = false;
     programs.zsh = {
       enable = true;
       enableCompletion = true;
-      # initExtra = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme; source ~/.config/.p10k.zsh\nalias x='${pkgs.zellij}/bin/zellij'";
       autosuggestion = {
         enable = true;
       };
       history = {
         ignoreAllDups = true;
       };
+      initExtra = ''
+        # This function is called whenever a command is not found.
+        command_not_found_handler() {
+          local p=${pkgs.comma}/bin/comma
+          if [ -x $p ]; then
+            # Run the helper program.
+            $p "$@"
+          else
+            # Indicate than there was an error so ZSH falls back to its default handler
+            echo "$1: command not found" >&2
+            return 127
+          fi
+        }
+      '';
     };
 
-    programs.zoxide = {
-      enable = true;
-      enableZshIntegration = true;
-    };
+    programs.zoxide.enable = true;
 
-    programs.tmux = {
-      enable = true;
-    };
-
+    programs.tmux.enable = true;
     programs.oh-my-posh = {
       enable = true;
       settings = {
