@@ -50,6 +50,23 @@
             { programs.nix-index-database.comma.enable = true; }
           ];
         };
+
+        toothless =
+          let
+            system = "x86_64-linux";
+          in
+          nixpkgs.lib.nixosSystem {
+            inherit system;
+            modules = [
+              ./hosts/toothless/configuration.nix
+              inputs.catppuccin.nixosModules.catppuccin
+
+              # These modules are required for evaluation but are unused
+              inputs.home-manager.nixosModules.default
+            ];
+          };
+
       };
+
     };
 }

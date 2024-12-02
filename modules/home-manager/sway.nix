@@ -39,7 +39,7 @@ in
       catppuccin.enable = true;
       config = {
         modifier = modifier;
-        terminal = "kitty";
+        terminal = "${pkgs.kitty}/bin/kitty";
         bars = [ ];
         colors = {
           background = "$base";
@@ -97,6 +97,7 @@ in
           "XF86AudioMute" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
 
           "Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot savecopy anything";
+          "Shift+Print" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot savecopy active";
           "${modifier}+m" = "exec ${hyprmag}/bin/hyprmag";
         };
       };

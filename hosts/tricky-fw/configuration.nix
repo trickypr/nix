@@ -72,6 +72,16 @@
     enable = true;
   };
 
+  programs.java = {
+    enable = true;
+    package = (pkgs.jdk17.override { enableJavaFX = true; });
+  };
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHD";
+  };
+
+  services.flatpak.enable = true;
+
   catppuccin.flavor = "latte";
   catppuccin.enable = true;
 
@@ -80,6 +90,7 @@
     grub = true;
     systemd-boot = false;
     plymouth = true;
+    isGraphical = true;
 
     # Locale management
     cbr.enable = true;

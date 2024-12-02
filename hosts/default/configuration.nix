@@ -48,6 +48,7 @@
     grub = true;
     systemd-boot = false;
     plymouth = true;
+    isGraphical = true;
 
     # Locale management
     cbr.enable = true;

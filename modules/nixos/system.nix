@@ -1,5 +1,17 @@
-{ pkgs, ... }:
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+let
+  cfg = config.t;
+in
+{
+  options = {
+    t.isGraphical = lib.mkEnableOption "if the system should have graphical utils";
+  };
+
   config = {
     nix.settings = {
       experimental-features = [
@@ -11,14 +23,8 @@
         "big-parallel"
         "kvm"
         "nixos-test"
-        "gccarch-znver4"
       ];
     };
-
-    # Enable CUPS to print documents.
-    services.printing.enable = true;
-    services.printing.drivers = [ pkgs.brlaser ];
-    services.flatpak.enable = true;
 
     services.avahi = {
       enable = true;
@@ -28,15 +34,7 @@
 
     # Allow unfree packages
     nixpkgs.config.allowUnfree = true;
-
     security.polkit.enable = true;
-
-    programs.java = {
-      enable = true;
-      package = (pkgs.jdk17.override { enableJavaFX = true; });
-    };
-
-    services.safeeyes.enable = true;
 
     hardware.graphics = {
       enable = true;
@@ -47,39 +45,24 @@
     };
 
     environment.sessionVariables = {
-      PATH_TO_FX = "${pkgs.jdk17.override { enableJavaFX = true; }}/lib/openjdk/lib";
-      JAVA_ROOM = "${pkgs.jdk17.override { enableJavaFX = true; }}";
       LIBVA_DRIVER_NAME = "iHD";
     };
 
     environment.systemPackages = with pkgs; [
       wget
-      kitty
-      kdePackages.okular
-      kdePackages.qtwayland
-      networkmanagerapplet
-      zathura
-      system-config-printer
-      waypipe
-      opusfile
 
       fira-code-nerdfont
       fira-code
       usbutils
       pciutils
 
-      jetbrains-toolbox
-      javaPackages.openjfx17
-
       man-pages
       man-pages-posix
     ];
     fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
-    programs.wireshark.enable = true;
-    programs.wireshark.package = pkgs.wireshark;
     documentation.dev.enable = true;
 
-    programs.firefox.enable = true;
+    programs.firefox.enable = cfg.isGraphical;
     programs.firefox.package = pkgs.firefox-bin;
 
     # Enable sound with pipewire.
@@ -116,7 +99,7 @@
       # dnsovertls = "true";
     };
 
-    programs.nix-ld.enable = true;
+    programs.nix-ld.enable = cfg.isGraphical;
     programs.nix-ld.libraries = with pkgs; [
       gtk3
       alsa-lib
