@@ -28,6 +28,12 @@
     ];
   };
 
+  t = {
+    grub = true;
+    systemd-boot = false;
+    cbr.enable = true;
+  };
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
