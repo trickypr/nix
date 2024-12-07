@@ -51,15 +51,18 @@ in
     environment.systemPackages = with pkgs; [
       wget
 
-      fira-code-nerdfont
+      nerd-fonts.fira-code
       fira-code
       usbutils
       pciutils
 
       man-pages
       man-pages-posix
+      nix-tree
     ];
-    fonts.packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
+    fonts.packages = with pkgs; [
+      nerd-fonts.fira-code
+    ];
     documentation.dev.enable = true;
 
     programs.firefox.enable = cfg.isGraphical;
@@ -68,12 +71,12 @@ in
     # Enable sound with pipewire.
     # sound.enable = false; # https://github.com/NixOS/nixpkgs/issues/319809
     # hardware.pulseaudio.enable = false;
-    security.rtkit.enable = true;
+    security.rtkit.enable = cfg.isGraphical;
     services.pipewire = {
-      enable = true;
-      alsa.enable = true;
+      enable = cfg.isGraphical;
+      alsa.enable = cfg.isGraphical;
       # alsa.support32Bit = true;
-      pulse.enable = true;
+      pulse.enable = cfg.isGraphical;
       # If you want to use JACK applications, uncomment this
       # jack.enable = true;
 

@@ -74,7 +74,7 @@
   programs.neovim.defaultEditor = true;
 
   # 1password __MUST__ be installed as root
-  programs._1password.enable = true;
+  programs._1password-cli.enable = true;
   programs._1password-gui.enable = true;
 
   # steam __MUST__ be installed as root

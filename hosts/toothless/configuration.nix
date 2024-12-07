@@ -25,12 +25,13 @@
       # 🦊
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGKZ4NodCumS5eW/0G1xJZ3/MIpKwVxTRhJLodcR5BZg"
       # 🐉
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGAbRb2Iug/RGoX13lLCycFa9X1+jT2ptIAiBzvO9XCo kiro@mg187"
     ];
   };
 
   t = {
-    grub = true;
-    systemd-boot = false;
+    grub = false;
+    systemd-boot = true;
     cbr.enable = true;
   };
 

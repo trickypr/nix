@@ -42,6 +42,8 @@
   networking.hostName = "tricky-fw";
   networking.networkmanager.enable = true;
   networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
+  networking.wireguard.enable = true;
+  programs.wireshark.enable = true;
   services.tailscale.enable = true;
   services.desktopManager.plasma6.enable = true;
 
