@@ -6,7 +6,7 @@
 }:
 {
   imports = [
-    # TODO: Hardware config
+    ./hardware-configuration.nix
     ../../modules/nixos
   ];
 
