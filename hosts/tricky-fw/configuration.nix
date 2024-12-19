@@ -21,6 +21,7 @@
 
   environment.systemPackages = [
     pkgs.fprintd
+    pkgs.poetry
   ];
 
   main-user = {

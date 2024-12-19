@@ -105,6 +105,7 @@
     tree
 
     obsidian
+    poetry
   ];
 
   catppuccin.flavor = "latte";

@@ -373,6 +373,39 @@ require("lazy").setup({
 		},
 	},
 	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {},
+		keys = {
+			{
+				"<leader>a",
+				function()
+					require("harpoon"):list():add()
+				end,
+			},
+			{
+				"<leader>h",
+				function()
+					local harpoon = require("harpoon")
+					harpoon.ui:toggle_quick_menu(harpoon:list())
+				end,
+			},
+			{
+				"<C-S-J>",
+				function()
+					require("harpoon"):list():prev()
+				end,
+			},
+			{
+				"<C-S-K>",
+				function()
+					require("harpoon"):list():next()
+				end,
+			},
+		},
+	},
+	{
 		"nvim-pack/nvim-spectre",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		event = "VeryLazy",

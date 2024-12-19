@@ -52,7 +52,6 @@ in
       wget
 
       nerd-fonts.fira-code
-      fira-code
       usbutils
       pciutils
 
@@ -61,6 +60,7 @@ in
       nix-tree
     ];
     fonts.packages = with pkgs; [
+      # If shit is brokey do "fc-cache -r"
       nerd-fonts.fira-code
     ];
     documentation.dev.enable = true;

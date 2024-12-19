@@ -355,6 +355,7 @@ in
         * {
           font-size: 0.75rem;
           font-weight: 500;
+          font-family: "FiraCode Nerd Font", sans-serif;
         }
 
         #waybar {
