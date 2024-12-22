@@ -60,9 +60,22 @@
             modules = [
               ./hosts/toothless/configuration.nix
               inputs.catppuccin.nixosModules.catppuccin
-
               # These modules are required for evaluation but are unused
               inputs.home-manager.nixosModules.default
+            ];
+          };
+
+        mit-exit-node =
+          let
+            system = "x86_64-linux";
+          in
+          nixpkgs.lib.nixosSystem {
+            inherit system;
+            modules = [
+              ./hosts/mit-exit-node/configuration.nix
+              # These modules are required for evaluation but are unused
+              inputs.home-manager.nixosModules.default
+              inputs.catppuccin.nixosModules.catppuccin
             ];
           };
 

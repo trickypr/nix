@@ -78,6 +78,15 @@ require("lazy").setup({
 		},
 	},
 	{
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		opts = {
+			modes = {
+				char = { jump_label = true },
+			},
+		},
+	},
+	{
 		"ahmedkhalf/project.nvim",
 		opt = {
 			manual_mode = true,
