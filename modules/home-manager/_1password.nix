@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.t._1password;
@@ -22,9 +27,10 @@ in
 
     programs.ssh = {
       enable = true;
-      extraConfig = ''Host *
-	IdentityAgent ~/.1password/agent.sock
-'';
+      extraConfig = ''
+        Host *
+        	IdentityAgent ~/.1password/agent.sock
+      '';
     };
 
     programs.git = {

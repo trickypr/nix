@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   cfg = config.t.dev.typst;
@@ -12,10 +17,12 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [
-      pkgs.typst
-    ] ++ lib.optionals cfg.nvim [
-      pkgs.typst-lsp
-    ];
+    home.packages =
+      [
+        pkgs.typst
+      ]
+      ++ lib.optionals cfg.nvim [
+        pkgs.typst-lsp
+      ];
   };
 }

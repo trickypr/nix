@@ -1,4 +1,9 @@
-{lib, config, pkgs, ...}:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.t.dev.haskell;
@@ -18,7 +23,8 @@ in
 
     programs.vscode = lib.mkIf cfg.vscode {
       extensions = [
-        pkgs.vscode-extensions.haskell.haskell { supportedGhcVersions = [ "94" ]; }
+        pkgs.vscode-extensions.haskell.haskell
+        { supportedGhcVersions = [ "94" ]; }
       ];
     };
   };

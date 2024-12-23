@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.t.dev;
@@ -15,4 +20,3 @@ in
     ];
   };
 }
-

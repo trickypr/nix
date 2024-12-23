@@ -1,3 +1,7 @@
 {
-  imports = [ ./grub.nix ./plymouth.nix ./systemdboot.nix ];
+  imports = [
+    ./grub.nix
+    ./plymouth.nix
+    ./systemdboot.nix
+  ];
 }

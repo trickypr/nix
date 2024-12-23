@@ -27,6 +27,7 @@ in
     packages = with pkgs; [
       git
       btop
+      tmux
     ];
     openssh.authorizedKeys.keys = [
       # 🦊

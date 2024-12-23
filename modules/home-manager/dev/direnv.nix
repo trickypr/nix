@@ -1,4 +1,4 @@
-{lib, config, ...}: 
+{ lib, config, ... }:
 
 let
   cfg = config.t.dev;
@@ -12,4 +12,4 @@ in
     programs.direnv.enable = true;
     programs.direnv.enableZshIntegration = true;
   };
-} 
+}

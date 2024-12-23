@@ -89,8 +89,10 @@ in
           "${modifier}+d" = "exec ${pkgs.fuzzel}/bin/fuzzel";
           "${modifier}+SHIFT+d" = "exec ${pkgs.fuzzel}/bin/fuzzel";
 
-          "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl --device intel_backlight --min-value=1 set 5%-";
-          "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl --device intel_backlight set 5%+";
+          "XF86MonBrightnessDown" =
+            "exec ${pkgs.brightnessctl}/bin/brightnessctl --device intel_backlight --min-value=1 set 5%-";
+          "XF86MonBrightnessUp" =
+            "exec ${pkgs.brightnessctl}/bin/brightnessctl --device intel_backlight set 5%+";
 
           "XF86AudioRaiseVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +10%";
           "XF86AudioLowerVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -10%";
