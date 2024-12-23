@@ -4,6 +4,9 @@
   pkgs,
   ...
 }:
+let
+  komga_port = 8080;
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -63,6 +66,12 @@
       enable = true;
     };
 
+    komga = {
+      enable = true;
+      port = komga_port;
+      stateDir = "/mnt/media/komga";
+    };
+
     tailscale = {
       enable = true;
       extraUpFlags = [ "--ssh" ];
@@ -72,6 +81,7 @@
     caddy = {
       enable = true;
       virtualHosts."toothless.boa-tiaki.ts.net".extraConfig = ''
+        reverse_proxy /komga/* 127.0.0.1:${komga_port}
         reverse_proxy 127.0.0.1:8096
       '';
     };
