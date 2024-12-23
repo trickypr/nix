@@ -24,6 +24,10 @@ in
   users.users.hickup = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
+    packages = with pkgs; [
+      git
+      btop
+    ];
     openssh.authorizedKeys.keys = [
       # 🦊
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGKZ4NodCumS5eW/0G1xJZ3/MIpKwVxTRhJLodcR5BZg"
@@ -81,7 +85,7 @@ in
     caddy = {
       enable = true;
       virtualHosts."toothless.boa-tiaki.ts.net".extraConfig = ''
-        reverse_proxy /komga/* 127.0.0.1:${komga_port}
+        reverse_proxy /komga/* 127.0.0.1:${toString komga_port}
         reverse_proxy 127.0.0.1:8096
       '';
     };
