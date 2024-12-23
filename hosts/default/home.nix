@@ -9,6 +9,7 @@
 {
   imports = [
     inputs.catppuccin.homeManagerModules.catppuccin
+    inputs.nix-index-database.hmModules.nix-index
     ../../modules/home-manager
     inputs._1password-shell-plugins.hmModules.default
   ];
@@ -70,7 +71,7 @@
   };
 
   home.packages = [
-    pkgs.gnome.nautilus
+    pkgs.nautilus
     pkgs.firefox-devedition-bin
     pkgs.obs-studio
     pkgs.vlc
