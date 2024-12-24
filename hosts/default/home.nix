@@ -72,7 +72,6 @@
 
   home.packages = [
     pkgs.nautilus
-    pkgs.firefox-devedition-bin
     pkgs.obs-studio
     pkgs.vlc
     pkgs.gnupg

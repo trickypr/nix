@@ -94,7 +94,6 @@
 
   home.packages = with pkgs; [
     nautilus
-    firefox-devedition-bin
     obs-studio
     vlc
     gnupg
