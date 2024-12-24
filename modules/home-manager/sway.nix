@@ -11,6 +11,17 @@ let
   modifier = "Mod4";
   # TODO: make this arch independant
   hyprmag = inputs.hyprmag.packages."x86_64-linux".hyprmag;
+
+  run-without-safeeeyes = pkgs.writeShellScriptBin "run-without-safeeeyes" ''
+    #!${pkgs.zsh}/bin/zsh
+    current_window=$(swaymsg -t get_tree | grep -A 45 '"focused": true' | egrep 'app_id|class' | cut -d \" -f 4 | grep .)
+
+    if [[ "$current_window" != "safeeyes" ]]; then
+       swaymsg "$@"
+    fi
+  '';
+
+  rws = "exec ${run-without-safeeeyes}/bin/run-without-safeeeyes";
 in
 {
   options = {
@@ -86,6 +97,33 @@ in
         };
 
         keybindings = lib.mkOptionDefault {
+          "${modifier}+Shift+q" = "${rws} kill";
+
+          "${modifier}+Shift+space" = "${rws} floating toggle";
+          "${modifier}+space" = "${rws} focus mode_toggle";
+
+          "${modifier}+1" = "${rws} workspace number 1";
+          "${modifier}+2" = "${rws} workspace number 2";
+          "${modifier}+3" = "${rws} workspace number 3";
+          "${modifier}+4" = "${rws} workspace number 4";
+          "${modifier}+5" = "${rws} workspace number 5";
+          "${modifier}+6" = "${rws} workspace number 6";
+          "${modifier}+7" = "${rws} workspace number 7";
+          "${modifier}+8" = "${rws} workspace number 8";
+          "${modifier}+9" = "${rws} workspace number 9";
+          "${modifier}+0" = "${rws} workspace number 10";
+
+          "${modifier}+Shift+1" = "${rws} move container to workspace number 1";
+          "${modifier}+Shift+2" = "${rws} move container to workspace number 2";
+          "${modifier}+Shift+3" = "${rws} move container to workspace number 3";
+          "${modifier}+Shift+4" = "${rws} move container to workspace number 4";
+          "${modifier}+Shift+5" = "${rws} move container to workspace number 5";
+          "${modifier}+Shift+6" = "${rws} move container to workspace number 6";
+          "${modifier}+Shift+7" = "${rws} move container to workspace number 7";
+          "${modifier}+Shift+8" = "${rws} move container to workspace number 8";
+          "${modifier}+Shift+9" = "${rws} move container to workspace number 9";
+          "${modifier}+Shift+0" = "${rws} move container to workspace number 10";
+
           "${modifier}+d" = "exec ${pkgs.fuzzel}/bin/fuzzel";
           "${modifier}+SHIFT+d" = "exec ${pkgs.fuzzel}/bin/fuzzel";
 
@@ -105,6 +143,9 @@ in
       };
     };
 
+    home.activation.kanshi = lib.hm.dag.entryAfter [ "sway" "writeBoundary" ] ''
+      run ${pkgs.systemd}/bin/systemctl restart --user kanshi
+    '';
     services.kanshi = {
       enable = true;
       settings = [
