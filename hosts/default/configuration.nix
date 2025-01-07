@@ -33,6 +33,8 @@
   networking.hostName = "tricky-desktop";
   networking.networkmanager.enable = true;
   networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
+  services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.package = pkgs.pkgs.mullvad-vpn;
 
   services.xserver.enable = true;
   services.desktopManager.plasma6.enable = true;
@@ -73,6 +75,8 @@
 
   programs.neovim.enable = true;
   programs.neovim.defaultEditor = true;
+
+  networking.firewall.allowedTCPPorts = [ 2222 ];
 
   # 1password __MUST__ be installed as root
   programs._1password.enable = true;

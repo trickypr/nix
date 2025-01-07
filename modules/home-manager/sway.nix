@@ -35,7 +35,15 @@ in
       pkgs.acpi
     ];
 
-    programs.kitty.enable = true;
+    programs.kitty = {
+      enable = true;
+      settings = {
+        font_family = "FiraCode Nerd Font";
+        font_size = "13.75";
+
+        linux_display_server = "wayland";
+      };
+    };
     catppuccin.pointerCursor.enable = false;
 
     home.pointerCursor = {

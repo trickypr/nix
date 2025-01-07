@@ -44,6 +44,11 @@ vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"))
 
 require("lazy").setup({
 	{
+		"chentoast/marks.nvim",
+		event = "VeryLazy",
+		opts = {},
+	},
+	{
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		opts = {},
