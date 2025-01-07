@@ -53,11 +53,12 @@ in
       pkgs.bat
     ];
 
+    # will overwrite my nvim config
+    catppuccin.nvim.enable = false;
     programs.neovim = {
       enable = true;
       defaultEditor = cfg.default;
       vimAlias = true;
-      catppuccin.enable = false; # will overwrite my nvim config
     };
 
     xdg.configFile."nvim" = {

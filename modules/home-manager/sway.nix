@@ -44,7 +44,9 @@ in
         linux_display_server = "wayland";
       };
     };
-    catppuccin.pointerCursor.enable = false;
+    catppuccin.cursors.enable = false;
+    catppuccin.waybar.enable = false;
+    catppuccin.sway.enable = false;
 
     home.pointerCursor = {
       gtk.enable = true;
@@ -55,7 +57,6 @@ in
 
     wayland.windowManager.sway = {
       enable = true;
-      catppuccin.enable = true;
       config = {
         modifier = modifier;
         terminal = "${pkgs.kitty}/bin/kitty";
@@ -433,7 +434,6 @@ in
           min-width: 80px;
         }
       '';
-      catppuccin.enable = false;
     };
   };
 }
