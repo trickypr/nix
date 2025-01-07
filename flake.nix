@@ -3,8 +3,20 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    catppuccin.url = "github:catppuccin/nix";
-    _1password-shell-plugins.url = "github:1Password/shell-plugins";
+    catppuccin = {
+      url = "github:catppuccin/nix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nixpkgs-stable.follows = "";
+        home-manager.follows = "home-manager";
+        home-manager-stable.follows = "";
+        nuscht-search.follows = "";
+      };
+    };
+    _1password-shell-plugins = {
+      url = "github:1Password/shell-plugins";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
