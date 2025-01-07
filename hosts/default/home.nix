@@ -72,7 +72,6 @@
 
   home.packages = [
     pkgs.nautilus
-    pkgs.obs-studio
     pkgs.vlc
     pkgs.gnupg
 
@@ -83,6 +82,7 @@
 
     pkgs.ktailctl
     pkgs.prismlauncher
+    pkgs.obsidian
   ];
 
   catppuccin.flavor = "latte";
