@@ -46,7 +46,7 @@ in
     };
     catppuccin.cursors.enable = false;
     catppuccin.waybar.enable = false;
-    catppuccin.sway.enable = false;
+    catppuccin.sway.enable = true;
 
     home.pointerCursor = {
       gtk.enable = true;

@@ -87,6 +87,7 @@ require("lazy").setup({
 		event = "VeryLazy",
 		opts = {
 			modes = {
+				search = { enable = true },
 				char = { jump_label = true },
 			},
 		},
@@ -234,6 +235,11 @@ require("lazy").setup({
 				end
 			end
 		end,
+		keys = {
+			{ "gd", vim.lsp.buf.definition, desc = "Go to definition" },
+			{ "gD", vim.lsp.buf.declaration, desc = "Go to declaration" },
+			{ "gy", vim.lsp.buf.type_definition, desc = "Go to type definition" },
+		},
 	},
 	{
 		"hrsh7th/nvim-cmp",
