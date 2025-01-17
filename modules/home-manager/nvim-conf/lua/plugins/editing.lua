@@ -32,43 +32,52 @@ return {
 		},
 	},
 
-	-- TODO: Replace with blink
 	{
-		"hrsh7th/nvim-cmp",
-		event = "InsertEnter",
-		dependencies = {
-			-- Will be keeping these disabled for the moment with the goal of making
-			-- sure other completion engines work well
-			-- "hrsh7th/cmp-buffer"
-			"hrsh7th/cmp-path",
-			"onsails/lspkind.nvim",
-		},
+		"saghen/blink.cmp",
+		version = "0.10.0",
 
-		config = function(_, opts)
-			local cmp = require("cmp")
-			cmp.setup({
-				snippet = {
-					expand = function(args)
-						vim.snippet.expand(args.body)
-					end,
-				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-				}),
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-					{ name = "path" },
-				}),
-			})
-		end,
+		--- @module 'blink.cmp'
+		--- @type blink.cmp.Config
+		opts = {},
+		opts_extend = { "sources.default" },
 	},
+	-- TODO: Replace with blink
+	--{
+	--	"hrsh7th/nvim-cmp",
+	--	event = "InsertEnter",
+	--	dependencies = {
+	--		-- Will be keeping these disabled for the moment with the goal of making
+	--		-- sure other completion engines work well
+	--		-- "hrsh7th/cmp-buffer"
+	--		"hrsh7th/cmp-path",
+	--		"onsails/lspkind.nvim",
+	--	},
+
+	--	config = function(_, opts)
+	--		local cmp = require("cmp")
+	--		cmp.setup({
+	--			snippet = {
+	--				expand = function(args)
+	--					vim.snippet.expand(args.body)
+	--				end,
+	--			},
+	--			mapping = cmp.mapping.preset.insert({
+	--				["<C-Space>"] = cmp.mapping.complete(),
+	--				["<CR>"] = cmp.mapping.confirm({ select = true }),
+	--			}),
+	--			sources = cmp.config.sources({
+	--				{ name = "nvim_lsp" },
+	--				{ name = "path" },
+	--			}),
+	--		})
+	--	end,
+	--},
 
 	{
 		"neovim/nvim-lspconfig",
 		event = "VeryLazy",
 		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
+			-- "hrsh7th/cmp-nvim-lsp",
 		},
 		opts = {
       -- stylua: ignore
