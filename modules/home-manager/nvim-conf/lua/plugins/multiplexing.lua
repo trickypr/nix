@@ -8,6 +8,9 @@ local diagnostic_goto = function(next, severity)
 	end
 end
 
+-- Make the terminal multiplexing behave in a way that I like
+vim.keymap.set("t", "<Esc>", "<C-\\><C-N>")
+
 return {
 	{
 		"folke/flash.nvim",
@@ -39,6 +42,7 @@ return {
 
 			-- Utility triggers
 			{ "<leader>e", "<cmd>Explore<cr>", desc = "Explore containing folder" },
+			{ "<leader>T", "<cmd>terminal<cr>", desc = "Open terminal in buffer" },
 
 			{
 				"<leader>ca",

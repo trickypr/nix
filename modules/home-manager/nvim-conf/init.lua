@@ -28,8 +28,5 @@ vim.o.colorcolumn = "80"
 vim.wo.number = true
 vim.wo.relativenumber = true
 
--- netrw config
-vim.g.netrw_keepdir = 0
-
 require("lazy").setup("plugins")
 Snacks.dim.enable()

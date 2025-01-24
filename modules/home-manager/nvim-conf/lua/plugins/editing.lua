@@ -38,40 +38,17 @@ return {
 
 		--- @module 'blink.cmp'
 		--- @type blink.cmp.Config
-		opts = {},
+		opts = {
+			completion = {
+				accept = { auto_brackets = { enabled = true } },
+				documentation = {
+					auto_show = true,
+				},
+				ghost_text = { enabled = true },
+			},
+		},
 		opts_extend = { "sources.default" },
 	},
-	-- TODO: Replace with blink
-	--{
-	--	"hrsh7th/nvim-cmp",
-	--	event = "InsertEnter",
-	--	dependencies = {
-	--		-- Will be keeping these disabled for the moment with the goal of making
-	--		-- sure other completion engines work well
-	--		-- "hrsh7th/cmp-buffer"
-	--		"hrsh7th/cmp-path",
-	--		"onsails/lspkind.nvim",
-	--	},
-
-	--	config = function(_, opts)
-	--		local cmp = require("cmp")
-	--		cmp.setup({
-	--			snippet = {
-	--				expand = function(args)
-	--					vim.snippet.expand(args.body)
-	--				end,
-	--			},
-	--			mapping = cmp.mapping.preset.insert({
-	--				["<C-Space>"] = cmp.mapping.complete(),
-	--				["<CR>"] = cmp.mapping.confirm({ select = true }),
-	--			}),
-	--			sources = cmp.config.sources({
-	--				{ name = "nvim_lsp" },
-	--				{ name = "path" },
-	--			}),
-	--		})
-	--	end,
-	--},
 
 	{
 		"neovim/nvim-lspconfig",
@@ -82,19 +59,20 @@ return {
 		opts = {
       -- stylua: ignore
 			simple = {
-				"dafny", "jsonls", "lua_ls", "elixirls", "elmls", "nil_ls", 
-        "rust_analyzer", "gleam", "gopls", "pylsp", "pyright", "pylyzer", 
-        "ts_ls", "clangd", "cssls", "html", "svelte", "typst_lsp", "templ",
+				"dafny", "jsonls", "lua_ls", "elixirls", "elmls", "nil_ls",
+        "rust_analyzer", "gleam", "gopls", "pylsp", "pyright", "pylyzer",
+        "ts_ls", "clangd", "cssls", "html", "svelte", "tinymist", "templ",
         "vhdl_ls", "hls"
 			},
 
+			--- @module 'lspconfig.configs'
 			servers = {
 				ltex = {
           -- stylua: ignore
 					filetypes = {
-						"bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb", 
-            "tex", "pandoc", "quarto", "rmd", "context", "html", "xhtml", 
-            "mail", "text", 
+						"bib", "gitcommit", "markdown", "org", "plaintex", "rst", "rnoweb",
+            "tex", "pandoc", "quarto", "rmd", "context", "html", "xhtml",
+            "mail", "text",
           },
 				},
 			},
@@ -112,6 +90,8 @@ return {
 					require("lspconfig")[server].setup(server_opts)
 				end
 			end
+
+			vim.lsp.inlay_hint.enable()
 		end,
 		keys = {
 			{ "gd", vim.lsp.buf.definition, desc = "Go to definition" },
