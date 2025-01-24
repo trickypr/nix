@@ -152,6 +152,22 @@ in
       };
     };
 
+    services.swayidle = {
+      enable = true;
+      events = [
+        {
+          event = "before-sleep";
+          command = "${pkgs.swaylock}/bin/swaylock -fF";
+        }
+      ];
+      timeouts = [
+        {
+          timeout = 60;
+          command = "${pkgs.swaylock}/bin/swaylock -fF";
+        }
+      ];
+    };
+
     home.activation.kanshi = lib.hm.dag.entryAfter [ "sway" "writeBoundary" ] ''
       run ${pkgs.systemd}/bin/systemctl restart --user kanshi
     '';
