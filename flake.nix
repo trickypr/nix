@@ -5,13 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     catppuccin = {
       url = "github:catppuccin/nix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        nixpkgs-stable.follows = "";
-        home-manager.follows = "home-manager";
-        home-manager-stable.follows = "";
-        nuscht-search.follows = "";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     _1password-shell-plugins = {
       url = "github:1Password/shell-plugins";
