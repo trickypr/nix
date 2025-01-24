@@ -40,6 +40,8 @@
   services.desktopManager.plasma6.enable = true;
   services.safeeyes.enable = true;
 
+  virtualisation.docker.enable = true;
+
   # services.xserver.enable = true;
   # services.xserver.desktopManager.gnome.enable = true;
 

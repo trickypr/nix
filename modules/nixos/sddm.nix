@@ -28,7 +28,7 @@ in
 
     # Sway appear in the list and it the default session
     programs.sway.enable = cfg.sway;
-    services.displayManager.defaultSession = "Sway";
+    services.displayManager.defaultSession = "sway";
 
     # kanshi systemd service
     systemd.user.services.kanshi = lib.mkIf cfg.sway {
