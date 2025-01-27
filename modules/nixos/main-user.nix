@@ -4,6 +4,7 @@
   pkgs,
   inputs,
   vars,
+  system,
   ...
 }:
 
@@ -45,6 +46,7 @@ in
     home-manager = {
       extraSpecialArgs = {
         inherit inputs;
+        inherit system;
         vars = vars;
       };
       users.${cfg.userName} = cfg.homeManager;

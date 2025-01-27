@@ -1,3 +1,11 @@
+local diagnostic_goto = function(next, severity)
+	local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+	severity = severity and vim.diagnostic.severity[severity] or nil
+	return function()
+		go({ severity = severity })
+	end
+end
+
 return {
 	{
 		"echasnovski/mini.pairs",
@@ -98,6 +106,19 @@ return {
 			{ "gD", vim.lsp.buf.declaration, desc = "Go to declaration" },
 			{ "gy", vim.lsp.buf.type_definition, desc = "Go to type definition" },
 			{ "gr", vim.lsp.buf.references, desc = "Go to references" },
+
+			{ "]e", diagnostic_goto(true, "ERROR"), desc = "Go to next error" },
+			{ "[e", diagnostic_goto(false, "ERROR"), desc = "Go to next error" },
+			{ "]w", diagnostic_goto(true, "WARN"), desc = "Go to next warning" },
+			{ "[w", diagnostic_goto(false, "WARN"), desc = "Go to next warning" },
+
+			{
+				"<leader>le",
+				function()
+					require("features.emmet").emmet("lustre")
+				end,
+				desc = "Open emmet expression expander for lustre",
+			},
 		},
 	},
 	{
@@ -111,6 +132,25 @@ return {
 				end,
 				desc = "Rename symbol",
 				expr = true,
+			},
+		},
+	},
+	{
+		"rachartier/tiny-code-action.nvim",
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-telescope/telescope.nvim" },
+		},
+		opts = {
+			backend = "delta",
+		},
+		keys = {
+			{
+				"<leader>ca",
+				function()
+					require("tiny-code-action").code_action()
+				end,
+				desc = "Code action",
 			},
 		},
 	},

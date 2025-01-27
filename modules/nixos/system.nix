@@ -24,6 +24,15 @@ in
         "kvm"
         "nixos-test"
       ];
+
+      # Enable my cachix caches to reduce the number of builds that I need to
+      # trigger
+      substituters = [
+        "https://trickypr.cachix.org"
+      ];
+      trusted-public-keys = [
+        "trickypr.cachix.org-1:NpJS0QWDDEUeFYlr2cvjrTB/zEvd5erIIZjQt+wDsNY="
+      ];
     };
 
     services.avahi = {

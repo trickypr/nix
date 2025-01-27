@@ -2,11 +2,14 @@
   lib,
   config,
   pkgs,
+  inputs,
+  system,
   ...
 }:
 
 let
   cfg = config.t.nvim;
+  emmet-helper = inputs.emmet-helper.packages."${system}".emmet-helper;
 in
 {
   options = {
@@ -23,34 +26,37 @@ in
       js = true;
     };
 
-    home.packages = [
-      pkgs.lua-language-server
-      pkgs.nil
-      pkgs.elmPackages.elm-language-server
-      pkgs.rust-analyzer
-      pkgs.ltex-ls
-      pkgs.templ
-      pkgs.go
-      pkgs.gopls
-      pkgs.python311Packages.python-lsp-server
-      pkgs.pyright
-      pkgs.nodePackages_latest.svelte-language-server
-      pkgs.prettierd
-      pkgs.pylyzer
-      pkgs.vhdl-ls
+    home.packages = with pkgs; [
+      lua-language-server
+      nil
+      elmPackages.elm-language-server
+      rust-analyzer
+      ltex-ls
+      templ
+      go
+      gopls
+      python311Packages.python-lsp-server
+      pyright
+      nodePackages_latest.svelte-language-server
+      prettierd
+      pylyzer
+      vhdl-ls
+      emmet-helper
 
       # clipboard support
-      pkgs.wl-clipboard
+      wl-clipboard
 
       # needed by treesitter
-      pkgs.clang
-      pkgs.clang-tools
+      clang
+      clang-tools
 
       # formatters
-      pkgs.stylua
-      pkgs.nixfmt-rfc-style
+      stylua
+      nixfmt-rfc-style
 
-      pkgs.bat
+      bat
+      # Diff engine for code actions
+      delta
     ];
 
     # will overwrite my nvim config

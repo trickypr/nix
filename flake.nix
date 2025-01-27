@@ -15,47 +15,66 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprmag.url = "github:SIMULATAN/hyprmag";
 
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Induvidual packages
+    hyprmag.url = "github:SIMULATAN/hyprmag";
+    emmet-helper.url = "github:trickypr/emmet-helper";
   };
 
   outputs =
-    { self, nixpkgs, ... }@inputs:
+    {
+      self,
+      nixpkgs,
+      ...
+    }@inputs:
     {
       nixosConfigurations = {
-        default = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-            vars = {
-              user = "trickypr";
-            };
-          };
-          modules = [
-            ./hosts/default/configuration.nix
-            inputs.catppuccin.nixosModules.catppuccin
-            inputs.home-manager.nixosModules.default
-            inputs.nix-index-database.nixosModules.nix-index
-            { programs.nix-index-database.comma.enable = true; }
-          ];
-        };
+        default =
+          let
+            system = "x86_64-linux";
+          in
+          nixpkgs.lib.nixosSystem
 
-        tricky-fw = nixpkgs.lib.nixosSystem {
-          specialArgs = {
-            inherit inputs;
-            vars = {
-              user = "trickypr";
+            {
+              specialArgs = {
+                inherit inputs;
+                inherit system;
+                vars = {
+                  user = "trickypr";
+                };
+              };
+              modules = [
+                ./hosts/default/configuration.nix
+                inputs.catppuccin.nixosModules.catppuccin
+                inputs.home-manager.nixosModules.default
+                inputs.nix-index-database.nixosModules.nix-index
+                { programs.nix-index-database.comma.enable = true; }
+              ];
             };
+
+        tricky-fw =
+          let
+            system = "x86_64-linux";
+          in
+          nixpkgs.lib.nixosSystem {
+            specialArgs = {
+              inherit inputs;
+              inherit system;
+              vars = {
+                user = "trickypr";
+              };
+            };
+            modules = [
+              ./hosts/tricky-fw/configuration.nix
+              inputs.catppuccin.nixosModules.catppuccin
+              inputs.home-manager.nixosModules.default
+              inputs.nix-index-database.nixosModules.nix-index
+              { programs.nix-index-database.comma.enable = true; }
+            ];
           };
-          modules = [
-            ./hosts/tricky-fw/configuration.nix
-            inputs.catppuccin.nixosModules.catppuccin
-            inputs.home-manager.nixosModules.default
-            inputs.nix-index-database.nixosModules.nix-index
-            { programs.nix-index-database.comma.enable = true; }
-          ];
-        };
 
         toothless =
           let
