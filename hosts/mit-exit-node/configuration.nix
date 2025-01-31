@@ -1,9 +1,13 @@
 {
-  inputs,
-  vars,
   pkgs,
   ...
 }:
+let
+  start = pkgs.writeShellScriptBin "start" ''
+    sudo tailscale login --advertise-exit-node --qr
+    ${pkgs.mitmproxy}/bin/mitmproxy --mode transparent
+  '';
+in
 {
   imports = [
     ../../modules/nixos
@@ -17,13 +21,7 @@
   users.users.node = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    packages = [ pkgs.mitmproxy ];
-    openssh.authorizedKeys.keys = [
-      # 🦊
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGKZ4NodCumS5eW/0G1xJZ3/MIpKwVxTRhJLodcR5BZg"
-      # 🐉
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGAbRb2Iug/RGoX13lLCycFa9X1+jT2ptIAiBzvO9XCo kiro@mg187"
-    ];
+    packages = [ start ];
   };
 
   t = {
@@ -43,23 +41,28 @@
   services = {
     openssh = {
       enable = true;
-      banner = ''
-               \****__              ____                                              
-                 |    *****\_      --/ *\-__                                          
-                 /_          (_    ./ ,/----'                                         
-        Art by     \__         (_./  /                                                
-         Ironwing     \__           \___----^__                                       
-                       _/   _                  \                                      
-                |    _/  __/ )\"\ _____         *\                                    
-                |\__/   /    ^ ^       \____      )                                   
-                 \___--"                    \_____ )                                  
-      '';
+      banner = '''';
     };
 
     tailscale = {
       enable = true;
+      extraDaemonFlags = [ "--state=mem:" ];
     };
+
+    getty.autologinUser = "node";
   };
+
+  programs.bash.loginShellInit = ''
+    echo "         \****__              ____              "
+    echo "           |    *****\_      --/ *\-__          "
+    echo "           /_          (_    ./ ,/----'         "
+    echo "  Art by     \__         (_./  /                "
+    echo "   Ironwing     \__           \___----^__       "
+    echo "                 _/   _                  \      "
+    echo "          |    _/  __/ )\"\ _____         *\    "
+    echo "          |\__/   /    ^ ^       \____      )   "
+    echo '           \___--"                    \_____ )  '
+  '';
 
   boot.kernel.sysctl = {
     "net.ipv4.ip_forward" = 1;
@@ -76,7 +79,7 @@
   virtualisation.vmVariant = {
     virtualisation = {
       memorySize = 2048;
-      cores = 3;
+      cores = 2;
       graphics = false;
     };
   };

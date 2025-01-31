@@ -21,7 +21,7 @@ in
         (defsrc 
           ${lib.optionalString cfg.caps "caps"}
           ${lib.optionalString cfg.gmeta "g"}
-          ${lib.optionalString cfg.dlayer "d h j k l f n w b"}
+          ${lib.optionalString cfg.dlayer "d h j k l f n w b r"}
         )
 
         (defalias
@@ -33,14 +33,14 @@ in
         (deflayer base 
           ${lib.optionalString cfg.caps "@caps"}
           ${lib.optionalString cfg.gmeta "@g"}
-          ${lib.optionalString cfg.dlayer "@d _ _ _ _ _ _ _ _"}
+          ${lib.optionalString cfg.dlayer "@d _ _ _ _ _ _ _ _ _"}
         )
 
         ${lib.optionalString cfg.dlayer ''
           (deflayer dlayer
             ${lib.optionalString cfg.caps "_"}
             ${lib.optionalString cfg.gmeta "_"}
-            _ left down up right f bspc (macro C-right) (macro C-left)
+            _ left down up right f bspc (macro C-right) (macro C-left) grv
           )
         ''}
       '';
