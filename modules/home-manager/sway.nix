@@ -162,7 +162,7 @@ in
       ];
       timeouts = [
         {
-          timeout = 60;
+          timeout = 5 * 60;
           command = "${pkgs.swaylock}/bin/swaylock -fF";
         }
       ];
