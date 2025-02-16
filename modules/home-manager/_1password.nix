@@ -29,8 +29,20 @@ in
       enable = true;
       extraConfig = ''
         Host *
-        	IdentityAgent ~/.1password/agent.sock
+          IdentityAgent ~/.1password/agent.sock
       '';
+
+      matchBlocks = {
+        cssa-bin-chicken = {
+          hostname = "cssa-bin-chicken-v3.boa-tiaki.ts.net";
+          user = "cssa";
+        };
+
+        anu-gitlab = {
+          hostname = "gitlab.cecs.anu.edu.au";
+          proxyJump = "cssa-bin-chicken";
+        };
+      };
     };
 
     programs.git = {

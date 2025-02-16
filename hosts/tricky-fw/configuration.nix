@@ -40,6 +40,8 @@
     packages = [ pkgs.firefox ];
   };
 
+  hardware.sane.enable = true;
+
   networking.hostName = "tricky-fw";
   networking.networkmanager.enable = true;
   networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
@@ -77,7 +79,7 @@
 
   programs.java = {
     enable = true;
-    package = (pkgs.jdk17.override { enableJavaFX = true; });
+    package = (pkgs.jdk23.override { enableJavaFX = true; });
   };
   environment.sessionVariables = {
     LIBVA_DRIVER_NAME = "iHD";

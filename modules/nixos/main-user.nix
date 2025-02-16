@@ -38,6 +38,7 @@ in
         "uinput"
         "power"
         "wireshark"
+        "scanner"
       ];
       shell = pkgs.zsh;
       openssh.authorizedKeys.keys = [ cfg.sshKey ];
