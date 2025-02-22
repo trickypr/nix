@@ -22,6 +22,8 @@
   environment.systemPackages = [
     pkgs.fprintd
     pkgs.poetry
+    pkgs.javacc
+    pkgs.scanbd
   ];
 
   main-user = {
@@ -144,6 +146,10 @@
       fi
     }
   '';
+
+  boot.kernelParams = [
+    "mitigations=off"
+  ];
 
   # steam __MUST__ be installed as root
   # programs.steam = {

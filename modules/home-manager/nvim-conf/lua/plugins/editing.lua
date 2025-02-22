@@ -70,7 +70,7 @@ return {
 				"dafny", "jsonls", "lua_ls", "elixirls", "elmls", "nil_ls",
         "rust_analyzer", "gleam", "gopls", "pylsp", "pyright", "pylyzer",
         "ts_ls", "clangd", "cssls", "html", "svelte", "tinymist", "templ",
-        "vhdl_ls", "hls"
+        "vhdl_ls", "hls", "jdtls"
 			},
 
 			--- @module 'lspconfig.configs'

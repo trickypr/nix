@@ -51,6 +51,7 @@ in
         vars = vars;
       };
       users.${cfg.userName} = cfg.homeManager;
+      backupFileExtension = "back";
     };
 
     programs.zsh.enable = true;

@@ -41,6 +41,7 @@ in
       prettierd
       pylyzer
       vhdl-ls
+      jdt-language-server
       emmet-helper
 
       # clipboard support
