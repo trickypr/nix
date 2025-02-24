@@ -57,17 +57,20 @@ in
       LIBVA_DRIVER_NAME = "iHD";
     };
 
-    environment.systemPackages = with pkgs; [
-      wget
+    environment.systemPackages =
+      with pkgs;
+      [
+        wget
 
-      nerd-fonts.fira-code
-      usbutils
-      pciutils
+        nerd-fonts.fira-code
+        usbutils
+        pciutils
 
-      man-pages
-      man-pages-posix
-      nix-tree
-    ];
+        man-pages
+        man-pages-posix
+        nix-tree
+      ]
+      ++ lib.optional cfg.isGraphical pkgs.waypipe;
     fonts.packages = with pkgs; [
       # If shit is brokey do "fc-cache -r"
       nerd-fonts.fira-code

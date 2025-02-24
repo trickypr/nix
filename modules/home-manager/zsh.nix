@@ -43,6 +43,9 @@ in
             return 127
           fi
         }
+
+        # 1password socket
+        [[ -z $SSH_AUTH_SOCK ]] && export SSH_AUTH_SOCK=~/.1password/agent.sock
       '';
     };
 

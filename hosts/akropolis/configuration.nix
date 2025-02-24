@@ -1,7 +1,6 @@
-{ pkgs }:
+{ pkgs, ... }:
 {
   imports = [
-    ../../modules
   ];
 
   networking = {

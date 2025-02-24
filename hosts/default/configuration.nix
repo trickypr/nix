@@ -7,7 +7,7 @@
   pkgs,
   ...
 }:
-{
+rec {
   imports = [
     # You will need to generate a hardware configuration with hardware by running
     # > sudo nixos-generate-config
@@ -48,6 +48,13 @@
   catppuccin.flavor = "latte";
   catppuccin.enable = true;
 
+  # Ram disk should be used for builds because zip
+  # Note that this my result in build failures
+  zramSwap.enable = true;
+  boot.tmp = {
+    useTmpfs = true;
+  };
+
   # Applies tricky's configs
   t = {
     grub = true;
@@ -79,6 +86,37 @@
   programs.neovim.defaultEditor = true;
 
   networking.firewall.allowedTCPPorts = [ 2222 ];
+
+  programs.ccache.enable = true;
+  programs.ccache.cacheDir = "/ccache";
+  nix.settings.extra-sandbox-paths = [ programs.ccache.cacheDir ];
+  nixpkgs.overlays = [
+    (self: super: {
+      ccacheWrapper = super.ccacheWrapper.override {
+        extraConfig = ''
+          export CCACHE_COMPRESS=1
+          export CCACHE_DIR="${programs.ccache.cacheDir}"
+          export CCACHE_UMASK=007
+          if [ ! -d "$CCACHE_DIR" ]; then
+            echo "====="
+            echo "Directory '$CCACHE_DIR' does not exist"
+            echo "Please create it with:"
+            echo "  sudo mkdir -m0770 '$CCACHE_DIR'"
+            echo "  sudo chown root:nixbld '$CCACHE_DIR'"
+            echo "====="
+            exit 1
+          fi
+          if [ ! -w "$CCACHE_DIR" ]; then
+            echo "====="
+            echo "Directory '$CCACHE_DIR' is not accessible for user $(whoami)"
+            echo "Please verify its access permissions"
+            echo "====="
+            exit 1
+          fi
+        '';
+      };
+    })
+  ];
 
   # 1password __MUST__ be installed as root
   programs._1password.enable = true;

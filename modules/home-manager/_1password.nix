@@ -27,11 +27,6 @@ in
 
     programs.ssh = {
       enable = true;
-      extraConfig = ''
-        Host *
-          IdentityAgent ~/.1password/agent.sock
-      '';
-
       matchBlocks = {
         cssa-bin-chicken = {
           hostname = "cssa-bin-chicken-v3.boa-tiaki.ts.net";
