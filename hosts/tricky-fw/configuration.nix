@@ -43,6 +43,7 @@
   };
 
   hardware.sane.enable = true;
+  services.hardware.bolt.enable = true;
 
   networking.hostName = "tricky-fw";
   networking.networkmanager.enable = true;

@@ -48,7 +48,6 @@ in
 
     programs.zoxide.enable = true;
 
-    programs.tmux.enable = true;
     programs.oh-my-posh = {
       enable = true;
       settings = {
