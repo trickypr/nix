@@ -16,7 +16,7 @@ in
     networkmanager.enable = true;
   };
 
-  catppuccin.flavor = "macchiato";
+  catppuccin.flavor = "latte";
   catppuccin.enable = true;
 
   users.users.hickup = {
