@@ -54,7 +54,7 @@ in
       email = "dns@trickypr.com";
       # dnsResolver = "1.1.1.1:53"; # Don't trust local dns
       # DNS is unreliable, check
-      dnsPropagationCheck = false;
+      extraLegoFlags = [ "--dns.propagation-wait 60s" ];
     };
     certs."t.trickypr.com" = {
       domain = "t.trickypr.com";
