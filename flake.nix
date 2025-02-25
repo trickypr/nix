@@ -22,12 +22,19 @@
     # Induvidual packages
     hyprmag.url = "github:SIMULATAN/hyprmag";
     emmet-helper.url = "github:trickypr/emmet-helper";
+
+    # Server stuff
+    dns = {
+      url = "github:kirelagin/dns.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     {
       self,
       nixpkgs,
+      dns,
       ...
     }@inputs:
     {
@@ -82,6 +89,8 @@
           in
           nixpkgs.lib.nixosSystem {
             inherit system;
+            specialArgs = { inherit dns; };
+
             modules = [
               ./hosts/toothless/configuration.nix
               inputs.catppuccin.nixosModules.catppuccin

@@ -41,9 +41,30 @@
         "type": "github"
       }
     },
-    "emmet-helper": {
+    "dns": {
       "inputs": {
         "flake-utils": "flake-utils_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1737653493,
+        "narHash": "sha256-qTbv8Pm9WWF63M5Fj0Od9E54/lsbMSQUBHw/s30eFok=",
+        "owner": "kirelagin",
+        "repo": "dns.nix",
+        "rev": "96e548ae8bd44883afc5bddb9dacd0502542276d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kirelagin",
+        "repo": "dns.nix",
+        "type": "github"
+      }
+    },
+    "emmet-helper": {
+      "inputs": {
+        "flake-utils": "flake-utils_3",
         "nixpkgs": "nixpkgs"
       },
       "locked": {
@@ -79,6 +100,21 @@
       }
     },
     "flake-utils_2": {
+      "locked": {
+        "lastModified": 1614513358,
+        "narHash": "sha256-LakhOx3S1dRjnh0b5Dg3mbZyH0ToC9I8Y2wKSkBaTzU=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5466c5bbece17adaab2d82fae80b46e807611bf3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_3": {
       "inputs": {
         "systems": "systems_2"
       },
@@ -206,6 +242,7 @@
       "inputs": {
         "_1password-shell-plugins": "_1password-shell-plugins",
         "catppuccin": "catppuccin",
+        "dns": "dns",
         "emmet-helper": "emmet-helper",
         "home-manager": "home-manager",
         "hyprmag": "hyprmag",

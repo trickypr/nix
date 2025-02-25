@@ -88,6 +88,8 @@ in
         reverse_proxy 127.0.0.1:8096
       '';
     };
+
+    # DNS that is forwarded out via akropolis
   };
 
   # VM config for testing
@@ -97,6 +99,20 @@ in
       cores = 3;
       graphics = false;
     };
+  };
+
+  # Access to network media share
+  environment.systemPackages = [ pkgs.cifs-utils ];
+  fileSystems."/mnt/nas" = {
+    device = "//nas.local/Media";
+    fsType = "cifs";
+    options =
+      let
+        # this line prevents hanging on network split
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+
+      in
+      [ "${automount_opts},credentials=/etc/nixos/smb-secrets" ];
   };
 
   # Cleanup and auto update
