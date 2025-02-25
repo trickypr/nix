@@ -89,7 +89,14 @@ in
       '';
     };
 
-    # DNS that is forwarded out via akropolis
+    resolved = {
+      enable = true;
+      domains = [ "~." ];
+      fallbackDns = [
+        "1.1.1.1#one.one.one.one"
+        "1.0.0.1#one.one.one.one"
+      ];
+    };
   };
 
   # VM config for testing
