@@ -52,7 +52,9 @@ in
     acceptTerms = true;
     defaults = {
       email = "dns@trickypr.com";
-      dnsResolver = "1.1.1.1:53"; # Don't trust local dns
+      # dnsResolver = "1.1.1.1:53"; # Don't trust local dns
+      # DNS is unreliable, check
+      dnsPropagationCheck = false;
     };
     certs."t.trickypr.com" = {
       domain = "t.trickypr.com";
