@@ -48,6 +48,17 @@ in
 
   # Let wheel people login
   security.sudo.wheelNeedsPassword = false;
+  security.acme = {
+    acceptTerms = true;
+    defaults.email = "dns@trickypr.com";
+    certs."t.trickypr.com" = {
+      domain = "t.trickypr.com";
+      extraDomainNames = [ "*.t.trickypr.com" ];
+      dnsProvider = "cloudflare";
+      group = "nginx";
+      environmentFile = "/etc/nixos/cf";
+    };
+  };
 
   services = {
     openssh = {
@@ -81,12 +92,21 @@ in
       permitCertUid = "caddy";
     };
 
-    caddy = {
+    nginx = {
       enable = true;
-      virtualHosts."toothless.boa-tiaki.ts.net".extraConfig = ''
-        reverse_proxy /komga/* 127.0.0.1:${toString komga_port}
-        reverse_proxy 127.0.0.1:8096
-      '';
+      virtualHosts = {
+        "jellyfin.t.trickypr.com" = {
+          forceSSL = true;
+          useACMEHost = "t.trickypr.com";
+          locations."/".proxyPass = "http://127.0.0.1:8096";
+        };
+
+        "komga.t.trickypr.com" = {
+          forceSSL = true;
+          useACMEHost = "t.trickypr.com";
+          locations."/".proxyPass = "http://127.0.0.1:${toString komga_port}";
+        };
+      };
     };
 
     resolved = {
