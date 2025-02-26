@@ -22,7 +22,7 @@ in
         pkgs.typst
       ]
       ++ lib.optionals cfg.nvim [
-        pkgs.typst-lsp
+        pkgs.tinymist
       ];
   };
 }
