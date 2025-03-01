@@ -47,6 +47,7 @@ return {
 		--- @module 'blink.cmp'
 		--- @type blink.cmp.Config
 		opts = {
+			keymap = { preset = "super-tab" },
 			completion = {
 				accept = { auto_brackets = { enabled = true } },
 				documentation = {
@@ -67,7 +68,7 @@ return {
 		opts = {
       -- stylua: ignore
 			simple = {
-				"dafny", "jsonls", "lua_ls", "elixirls", "elmls", "nil_ls",
+				"dafny", "jsonls", "lua_ls", "elmls", "nil_ls",
         "rust_analyzer", "gleam", "gopls", "pylsp", "pyright", "pylyzer",
         "ts_ls", "clangd", "cssls", "html", "svelte", "tinymist", "templ",
         "vhdl_ls", "hls", "jdtls"
@@ -83,6 +84,7 @@ return {
             "mail", "text",
           },
 				},
+				elixirls = { cmd = { "elixir-ls" } },
 			},
 		},
 		config = function(_, opts)

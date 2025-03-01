@@ -24,6 +24,8 @@
     pkgs.poetry
     pkgs.javacc
     pkgs.scanbd
+    pkgs.wireshark
+    pkgs.termshark
   ];
 
   main-user = {
