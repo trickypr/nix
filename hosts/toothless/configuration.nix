@@ -124,6 +124,13 @@ in
       nginx.virtualHost = "git.t.trickypr.com";
       package = pkgs.cgit-pink;
       scanPath = "/var/lib/git-server";
+      settings = {
+        root-title = "cabal git";
+        root-desc = "for things that i don't want to be public";
+        logo = "";
+
+        css = "https://files.trickypr.com/cgit-custom.css";
+      };
     };
 
     tailscale = {
