@@ -42,7 +42,7 @@ in
         home = "/var/lib/git-server";
         isSystemUser = true;
         group = "git";
-        shell = "${pkgs.git}/bin/git";
+        shell = "${pkgs.git}/bin/git-shell";
         createHome = true;
         openssh.authorizedKeys.keys = keys;
       };
