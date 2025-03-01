@@ -4,6 +4,13 @@
 }:
 let
   komga_port = 8080;
+  keys = [
+    # 🦊
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGKZ4NodCumS5eW/0G1xJZ3/MIpKwVxTRhJLodcR5BZg"
+    # 🐉
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGAbRb2Iug/RGoX13lLCycFa9X1+jT2ptIAiBzvO9XCo kiro@mg187"
+  ];
+
 in
 {
   imports = [
@@ -19,20 +26,29 @@ in
   catppuccin.flavor = "latte";
   catppuccin.enable = true;
 
-  users.users.hickup = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    packages = with pkgs; [
-      git
-      btop
-      tmux
-    ];
-    openssh.authorizedKeys.keys = [
-      # 🦊
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGKZ4NodCumS5eW/0G1xJZ3/MIpKwVxTRhJLodcR5BZg"
-      # 🐉
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGAbRb2Iug/RGoX13lLCycFa9X1+jT2ptIAiBzvO9XCo kiro@mg187"
-    ];
+  users = {
+    users = {
+      hickup = {
+        isNormalUser = true;
+        extraGroups = [ "wheel" ];
+        packages = with pkgs; [
+          git
+          btop
+        ];
+        openssh.authorizedKeys.keys = keys;
+      };
+
+      git = {
+        home = "/var/lib/git-server";
+        isSystemUser = true;
+        group = "git";
+        shell = "${pkgs.git}/bin/git";
+        createHome = true;
+        openssh.authorizedKeys.keys = keys;
+      };
+    };
+
+    groups.git = { };
   };
 
   t = {
@@ -82,6 +98,15 @@ in
                 |\__/   /    ^ ^       \____      )                                   
                  \___--"                    \_____ )                                  
       '';
+
+      extraConfig = ''
+        Match user git
+          AllowTcpForwarding no
+          AllowAgentForwarding no
+          PasswordAuthentication no
+          PermitTTY no
+          X11Forwarding no
+      '';
     };
 
     jellyfin = {
@@ -92,6 +117,13 @@ in
       enable = true;
       port = komga_port;
       stateDir = "/mnt/media/komga";
+    };
+
+    cgit.default = {
+      enable = true;
+      nginx.virtualHost = "git.t.trickypr.com";
+      package = pkgs.cgit-pink;
+      scanPath = "/var/lib/git-server";
     };
 
     tailscale = {
@@ -113,6 +145,11 @@ in
           forceSSL = true;
           useACMEHost = "t.trickypr.com";
           locations."/".proxyPass = "http://127.0.0.1:${toString komga_port}";
+        };
+
+        "git.t.trickypr.com" = {
+          forceSSL = true;
+          useACMEHost = "t.trickypr.com";
         };
       };
     };
